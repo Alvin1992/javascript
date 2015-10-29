@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>modify headline</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 400px;
+		margin: 20px auto;
+		border: 1px solid grey;
+		border-bottom: none;
+		font-size: 12px;
+	}
+
+	h3 {
+		background-color: green;
+		color: #fff;
+		height: 20px;
+		line-height: 20px;
+		font-weight: normal;
+		font-size: 14px;
+	}
+
+	li {
+		list-style-type: none;
+		height: 30px;
+		line-height: 30px;
+		position: relative;
+		border-bottom: 1px solid grey;
+		padding-left: 20px;
+	}
+
+	span {
+		cursor: pointer;
+	}
+
+	.save, .undo {
+		position: absolute;
+		text-align: center;
+		right: 100px;
+		top: 0;
+		display: none;
+	}
+
+	.save {
+		right: 140px;
+	}
+
+	.modify {
+		margin-left: 20px;
+	}
+
+	.shape {
+		border: none;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<h3>今日概况</h3>
+		<ul>
+			<li><input class="shape" type="text" value="今天是2015年10月28日" readonly><span class="modify">修改</span><span class="save">保存</span><span class="undo">取消</span></li>
+			<li><input class="shape" type="text" value="气温很低" readonly><span class="modify">修改</span><span class="save">保存</span><span class="undo">取消</span></li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+	var aModify = getElementsByClass('span', 'modify');
+	var aInput = document.getElementsByTagName('input');
+	var aSave = getElementsByClass('span', 'save');
+	var aUndo = getElementsByClass('span', 'undo');
+
+	for (var i = 0; i < aModify.length; i++) {
+		aModify[i].index = i;
+		aModify[i].onclick = function() {
+				var x = this.index;
+				var that = this;
+				var text = aInput[x].value;
+
+				this.style.display = 'none';
+				aInput[x].readOnly = false;
+				aInput[x].className = '';
+				aInput[x].focus();
+				aSave[x].style.display = 'block';
+				aUndo[x].style.display = 'block';
+				aInput[x].value = '';
+
+
+				aSave[x].onclick = function() {
+					modifyFun(that, aInput[x], aSave[x], aUndo[x]);
+					!aInput[x].value && (aInput[x].value = text);
+				}
+
+
+				aUndo[x].onclick = function() {
+					aInput[x].value = text;
+					modifyFun(that, aInput[x], aSave[x], aUndo[x])
+				}
+
+
+		}
+	}
+
+
+	function modifyFun(obj1, obj2, obj3, obj4) {
+		obj1.style.display = 'inline-block';
+		obj2.readOnly = true;
+		obj2.className = 'shape';
+		obj3.style.display = 'none';
+		obj4.style.display = 'none';
+	}
+
+
+
+	function getElementsByClass(tag, str) {
+		var aElements = document.getElementsByTagName(tag);
+		var arr= []
+		for (var i = 0; i < aElements.length; i++) {
+			if (aElements[i].className == str) {
+				arr.push(aElements[i]);
+			}
+		}
+		return arr;
+	}
+
+	</script>
+</body>
+</html>
