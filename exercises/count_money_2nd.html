@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>count money 2nd edition</title>
+</head>
+<body>
+	<ul id="list">
+		<li>
+	  	<input type="button" value="-" />
+	    <strong>0</strong>
+	  	<input type="button" value="+" />
+	    单价：<em>12.5元</em>
+	    小计：<span>0元</span>
+	  </li>
+		<li>
+	  	<input type="button" value="-" />
+	    <strong>0</strong>
+	  	<input type="button" value="+" />
+	    单价：<em>10.5元</em>
+	    小计：<span>0元</span>
+	  </li>
+		<li>
+	  	<input type="button" value="-" />
+	    <strong>0</strong>
+	  	<input type="button" value="+" />
+	    单价：<em>8.5元</em>
+	    小计：<span>0元</span>
+	  </li>
+		<li>
+	  	<input type="button" value="-" />
+	    <strong>0</strong>
+	  	<input type="button" value="+" />
+	    单价：<em>8元</em>
+	    小计：<span>0元</span>
+	  </li>
+		<li>
+	  	<input type="button" value="-" />
+	    <strong>0</strong>
+	  	<input type="button" value="+" />
+	    单价：<em>14.5元</em>
+	    小计：<span>0元</span>
+	  </li>
+	</ul>
+
+	<p>
+	商品合计共：0件，共花费了：0元<br />
+	其中最贵的商品单价是：0元
+	</p>
+	<script type="text/javascript">
+
+	function $(selector, context) {
+		var firstChar = selector.charAt(0);
+		if (firstChar === "#") {
+			return document.getElementById(selector.slice(1));
+		}else {
+			context = context || document;
+			return context.getElementsByTagName(selector);
+		}
+	}
+
+
+	function computeValue(li) {
+		var aInput = $('input', li);
+		var amount = $('strong', li)[0];
+		var unitPrice = $('em', li)[0];
+		var value = $('span', li)[0];
+
+		aInput[1].onclick = function() {
+			total_amount++;
+			total_value += parseFloat(unitPrice.innerHTML);
+			amount.innerHTML = parseInt(amount.innerHTML) + 1;
+			value.innerHTML = parseFloat(value.innerHTML) + parseFloat(unitPrice.innerHTML) + '元';
+			if (parseFloat(unitPrice.innerHTML) > most_expensive) {
+				most_expensive = parseFloat(unitPrice.innerHTML);
+			}
+
+			oP.innerHTML = "商品合计共："+ total_amount +"件，共花费了："+ total_value +"元<br />其中最贵的商品单价是："+ most_expensive +"元";
+		}
+
+		aInput[0].onclick = function() {
+			if (parseFloat(amount.innerHTML) == 0) {
+				return;
+			}
+			most_expensive = 0;
+			total_amount--;
+			total_value -= parseFloat(unitPrice.innerHTML);
+			amount.innerHTML = parseInt(amount.innerHTML) - 1;
+			value.innerHTML = parseFloat(value.innerHTML) - parseFloat(unitPrice.innerHTML) + '元';
+			for (var i = 0; i < aStrong.length; i++) {
+				if (parseInt(aStrong[i].innerHTML) != 0) {
+					if (parseFloat(aEm[i].innerHTML) > most_expensive) {
+						most_expensive = parseFloat(aEm[i].innerHTML);
+					}
+				}
+			}
+			oP.innerHTML = "商品合计共："+ total_amount +"件，共花费了："+ total_value +"元<br />其中最贵的商品单价是："+ most_expensive +"元";
+		}
+	}
+
+
+	var aLi = $('li', $('#list'));
+	var oP = $('p')[0];
+	var total_amount = 0;
+	var total_value = 0;
+	var most_expensive = 0;
+	var aStrong = $('strong');
+	var aEm = $('em');
+	for (var i = 0; i < aLi.length; i++) {
+		computeValue(aLi[i]);
+	};
+
+
+	</script>
+</body>
+</html>

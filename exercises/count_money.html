@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>count money</title>
+	<style type="text/css">
+	.wrap {
+		width: 500px;
+		margin: 20px auto;
+	}
+
+	ul li p {
+		display: inline-block;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<ul>
+			<li>
+				<span>-</span>
+				<span>0</span>
+				<span>+</span>
+				<p>单价：<span>12.5</span>元 小计：<span>0</span>元</p>
+			</li>
+			<li>
+				<span>-</span>
+				<span>0</span>
+				<span>+</span>
+				<p>单价：<span>10.5</span>元 小计：<span>0</span>元</p>
+			</li>
+			<li>
+				<span>-</span>
+				<span>0</span>
+				<span>+</span>
+				<p>单价：<span>8.5</span>元 小计：<span>0</span>元</p>
+			</li>
+			<li>
+				<span>-</span>
+				<span>0</span>
+				<span>+</span>
+				<p>单价：<span>8</span>元 小计：<span>0</span>元</p>
+			</li>
+			<li>
+				<span>-</span>
+				<span>0</span>
+				<span>+</span>
+				<p>单价：<span>14.5</span>元 小计：<span>0</span>元</p>
+			</li>
+		</ul>
+		<p id="sum">商品合计共：<span>0</span>件，共花费了：<span>0</span>元<br/>其中最贵的商品单价是：<span>0</span>元 </p>
+	</div>
+	<script type="text/javascript">
+
+	function count(obj1, i) {
+		var countSpan = obj1.getElementsByTagName('span');
+		var unitPrice = parseFloat(countSpan[3].innerHTML);
+		var count = parseInt(countSpan[1].innerHTML);
+
+		countSpan[0].onclick = function() {
+			count--;
+			count < 0 && (count = 0);
+			setNum(countSpan[1], countSpan[4], unitPrice, count, i);
+		}
+
+		countSpan[2].onclick = function() {
+			count++;
+			setNum(countSpan[1], countSpan[4], unitPrice, count, i);
+		}
+
+	}
+
+
+	function summery(arr1, arr2, arr3) {
+		var aSpan = sum.getElementsByTagName('span');
+		aSpan[0].innerHTML = arr1.reduce(function(pre, cur) {return pre + cur}, 0);
+		aSpan[1].innerHTML = arr2.reduce(function(pre, cur) {return pre + cur}, 0);
+		var max = Math.max.apply(Math, arr3);
+		if (max == 0) {
+			aSpan[2].innerHTML = '0';
+			return
+		}
+		var num = arr3.indexOf(max);
+		aSpan[2].innerHTML = aLi[num].children[3].children[0].innerHTML;
+	}
+
+	function setNum(obj1, obj2, unitPrice, count, i) {
+		obj1.innerHTML = count;
+		obj2.innerHTML = count * unitPrice;
+		arrPiece[i] = count;
+		arrSum[i] = count * unitPrice;
+		arrUnitPrice[i] = parseFloat(count) ? unitPrice : 0;
+		summery(arrPiece, arrSum, arrUnitPrice);
+	}
+
+
+
+	var aLi = document.getElementsByTagName('li');
+	var sum = document.getElementById('sum');
+	arrPiece = [];
+	arrSum = [];
+	arrUnitPrice = [];
+
+	for (var i = 0; i < aLi.length; i++) {
+		arrPiece[i] = 0;
+		arrSum[i] = 0;
+		arrUnitPrice[i] = 0;
+		count(aLi[i], i);
+	};
+
+
+	</script>
+</body>
+</html>
