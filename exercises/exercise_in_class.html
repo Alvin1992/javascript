@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>comment high level</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 400px;
+		margin: 20px auto;
+	}
+
+	ul {
+		margin-top: 10px;
+		zoom: 1;
+	}
+
+	ul:after {
+		content: "";
+		display: block;
+		height: 0;
+		clear: both;
+	}
+
+	li {
+		width: 22px;
+		height: 22px;
+		float: left;
+		list-style-type: none;
+		position: relative;
+		font-size: 16px;
+	}
+
+	.active {
+		color: red;
+	}
+
+	span {
+		position: absolute;
+		bottom: -20px;
+		left: 5px;
+		text-align: center;
+		color: #000;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+	<p>请打分，质量差的文章请毫不犹豫地给负分</p>
+		<ul>
+			<li><span>-5</span>*</li>
+			<li><span>-4</span>*</li>
+			<li><span>-3</span>*</li>
+			<li><span>-2</span>*</li>
+			<li><span>-1</span>*</li>
+			<li><span>0</span>*</li>
+			<li><span>1</span>*</li>
+			<li><span>2</span>*</li>
+			<li><span>3</span>*</li>
+			<li><span>4</span>*</li>
+			<li><span>5</span>*</li>
+		</ul>
+	</div>
+	<div class="wrap">
+	<p>请打分，质量差的文章请毫不犹豫地给负分</p>
+		<ul>
+			<li><span>-5</span>*</li>
+			<li><span>-4</span>*</li>
+			<li><span>-3</span>*</li>
+			<li><span>-2</span>*</li>
+			<li><span>-1</span>*</li>
+			<li><span>0</span>*</li>
+			<li><span>1</span>*</li>
+			<li><span>2</span>*</li>
+			<li><span>3</span>*</li>
+			<li><span>4</span>*</li>
+			<li><span>5</span>*</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		function $(m, n) {
+			var firstChar = m.charAt(0);
+			if (firstChar === "#") {
+				return document.getElementById(m.slice(1));
+			} else {
+				n = n || document;
+				return n.getElementsByTagName(m);
+			}
+		}
+
+		function addClass(ul) {
+			var aLi = $('li', ul);
+			var middle = Math.floor(aLi.length / 2);
+			var z = -1;
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].index = i;
+				aLi[i].onmouseover = function() {
+					var x = this.index;
+					for (var i = 0; i < aLi.length; i++) {
+						aLi[i].className = '';
+					}
+
+					addColor(aLi, middle, x);
+				}
+
+				aLi[i].onclick = function() {
+					z = this.index;
+				}
+
+				aLi[i].onmouseout = function() {
+					for (var i = 0; i < aLi.length; i++) {
+						aLi[i].className = '';
+					}
+					if (z == -1) {
+						return;
+					} else {
+						addColor(aLi, middle, z);
+					}
+				}
+			}
+		}
+
+		function addColor(aLi, middle, num) {
+			if (num > middle) {
+				for (var j = middle; j <= num; j++) {
+					aLi[j].className = 'active';
+				}
+			} else {
+				for (var j = num; j <= middle; j++) {
+					aLi[j].className = 'active';
+				}
+			}
+		}
+
+		var oUl1 = $('ul', $('div')[0])[0];
+		addClass(oUl1);
+		var oUl2 = $('ul', $('div')[1])[0];
+		addClass(oUl2);
+
+
+	</script>
+</body>
+</html>
