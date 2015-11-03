@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			#div1 div,#div2 div{
+				width: 200px;
+				height: 200px;
+				border: 1px solid #000;
+				font-size: 100px;
+				line-height: 200px;
+				text-align: center;
+				display: none;
+			}
+			.active{
+				background: red;
+			}
+		</style>
+<script>
+</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			<input class="active" type="button" value="选项卡一" />
+			<input type="button" value="选项卡二" />
+			<input type="button" value="选项卡三" />
+			<div style="display:block;" >1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<div id="div2">
+			<input class="active" type="button" value="选项卡一" />
+			<input type="button" value="选项卡二" />
+			<input type="button" value="选项卡三" />
+			<div style="display:block;" >1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<script type="text/javascript">
+
+		function setEvent(div, e) {
+			var aInput = div.getElementsByTagName('input');
+			var aDiv = div.getElementsByTagName('div');
+
+			for (var i = 0; i < aInput.length; i++) {
+				aInput[i].index = i;
+				aInput[i]['on'+e] = function() {
+					for (var i = 0; i < aInput.length; i++) {
+						aInput[i].className = '';
+						aDiv[i].style.display = 'none';
+					}
+					this.className = 'active';
+					aDiv[this.index].style.display = 'block';
+				}
+			}
+
+		}
+
+		var oDiv1 = document.getElementById('div1');
+		var oDiv2 = document.getElementById('div2');
+
+		setEvent(oDiv1, 'click');
+		setEvent(oDiv2, 'mouseover');
+
+
+		</script>
+	</body>
+</html>

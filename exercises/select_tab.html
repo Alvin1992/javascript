@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select tab</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 1000px;
+		margin: 10px auto;
+		overflow: hidden;
+	}
+
+	.nav {
+		width: 188px;
+		text-align: center;
+		border: 1px solid #FE61EC;
+		border-bottom: none;
+		float: left;
+	}
+
+	.nav li {
+		background-color: #999;
+		list-style-type: none;
+		height: 75px;
+		line-height: 75px;
+		border-bottom: 1px solid #FE61EC;
+		color: #fff;
+		cursor: pointer;
+	}
+
+	.detail {
+		width: 810px;
+		float: left;
+		position: relative;
+	}
+
+	#sub-nav {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		background-color: #000;
+		opacity: 0.5;
+		overflow: hidden;
+	}
+
+	#sub-nav li {
+		float: left;
+		color: #fff;
+		height: 30px;
+		line-height: 30px;
+		text-align: center;
+		border-right: 1px solid white;
+		list-style-type: none;
+		cursor: pointer;
+	}
+
+	.active {
+		background-color: red;
+	}
+
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="nav">
+			<ul id="nav-bar">
+				<li>最热团购</li>
+				<li>商城特惠</li>
+				<li>名品推荐</li>
+				<li>缤纷活动</li>
+			</ul>
+		</div>
+		<div class="detail" id="presentation">
+			<img src="img/0/0.jpg" height="300" width="810">
+			<ul id="sub-nav">
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+
+	function $(selector, context) {
+		var firstChar = selector.charAt(0);
+		if (firstChar === "#") {
+			return document.getElementById(selector.slice(1));
+		}else {
+			context = context || document;
+			return context.getElementsByTagName(selector);
+		}
+	}
+
+
+	function addSubNav(n, subnav, num) {
+		//清除subnav下的结构
+		subnav.innerHTML = '';
+		//生成subnav下的结构
+		var oLi = null;
+		for (var i = 0; i < num; i++) {
+			oLi = document.createElement('li');
+			oLi.innerHTML = 'test' + (i + 1);
+			oLi.style.width = (810 / num - 1) + 'px';
+			subnav.appendChild(oLi);
+		}
+
+		aLi[0].className = 'active';
+		oImg.src = 'img/'+ n +'/0.jpg';
+
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].index = i;
+			aLi[i].onmouseover = function() {
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].className = '';
+				}
+				this.className = 'active';
+				oImg.src = 'img/'+ n +'/'+ this.index +'.jpg';
+			}
+		}
+	}
+
+	var picDiv = $('#presentation');
+	var oImg = $('img', picDiv)[0];
+	var aLi = $('li', $('ul', picDiv)[0]);
+	var subnav = $('ul', picDiv)[0];
+	var navBar = $('#nav-bar');
+	var bar = $('li', navBar);
+	var arr = [3, 4, 5, 4];
+
+	addSubNav(0, subnav, arr[0]);
+
+	for (var i = 0; i < bar.length; i++) {
+		bar[i].index = i;
+		bar[i].onmouseover = function() {
+			addSubNav(this.index, subnav, arr[this.index]);
+		}
+	};
+
+
+
+	</script>
+</body>
+</html>

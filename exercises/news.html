@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>news</title>
+	<link rel="stylesheet" type="text/css" href="reset.css">
+	<style type="text/css">
+	.wrap {
+		width: 500px;
+		margin: 10px auto;
+	}
+
+	h3 {
+		border-bottom: 1px solid blue;
+	}
+
+	ul {
+		background-color: #dee7e7;
+		margin-top: 5px;
+	}
+
+	li {
+		border-bottom: 1px dotted white;
+		cursor: pointer;
+		height: 20px;
+		overflow: hidden;
+	}
+
+	/*li:after {
+		content: "";
+		display: block;
+		clear: both;
+		height: 0;
+	}*/
+
+	.active {
+		height: 80px;
+	}
+
+	li > span {
+		font-size: 12px;
+		text-align: center;
+		display: block;
+		width: 17px;
+		height: 13px;
+		background: url(img/1.png) blue 0 0 no-repeat;
+	}
+
+	li > span, img, p {
+		float: left;
+	}
+
+	img {
+		margin: 0 5px;
+		display: none;
+	}
+
+	p {
+		width: 393px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	p span {
+		position: absolute;
+		right: 5px;
+		bottom: 0;
+		background-color: blue;
+		cursor: pointer;
+		/*display: none;*/
+	}
+
+	#week, #all {
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap" id="container">
+		<h3 id="headline">
+			<strong>观看排行榜</strong>
+			<span>每日</span>
+			<span>每周</span>
+			<span>全部</span>
+		</h3>
+		<div id="day">
+			<ul>
+				<li>
+					<span>1</span>
+					<img src="img/2.png" height="60" width="80">
+					<p>从毛泽东的“弹钢琴”思想到邓小平的“两手”论，再到习近平的“全面”观，中国共产党统筹兼顾协调发展的理念和方法论不仅得到良好的继承，同时又得到与时俱进的发展。<span>播放</span></p>
+				</li>
+				<li>
+					<span>2</span>
+					<img src="img/2.png">
+					<p>从毛泽东的“弹钢琴”思想到邓小平的“两手”论，再到习近平的“全面”观，中国共产党统筹兼顾协调发展的理念和方法论不仅得到良好的继承，同时又得到与时俱进的发展。<span>播放</span></p>
+				</li>
+				<li>
+					<span>3</span>
+					<img src="img/2.png">
+					<p>从毛泽东的“弹钢琴”思想到邓小平的“两手”论，再到习近平的“全面”观，中国共产党统筹兼顾协调发展的理念和方法论不仅得到良好的继承，同时又得到与时俱进的发展。<span>播放</span></p>
+				</li>
+				<li>
+					<span>4</span>
+					<img src="img/2.png">
+					<p>从毛泽东的“弹钢琴”思想到邓小平的“两手”论，再到习近平的“全面”观，中国共产党统筹兼顾协调发展的理念和方法论不仅得到良好的继承，同时又得到与时俱进的发展。<span>播放</span></p>
+				</li>
+				<li>
+					<span>5</span>
+					<img src="img/2.png">
+					<p>从毛泽东的“弹钢琴”思想到邓小平的“两手”论，再到习近平的“全面”观，中国共产党统筹兼顾协调发展的理念和方法论不仅得到良好的继承，同时又得到与时俱进的发展。<span>播放</span></p>
+				</li>
+			</ul>
+		</div>
+
+		<div id="week">
+			<ul>
+				<li>
+					<span>1</span>
+					<img src="img/2.png" height="60" width="80">
+					<p>李克强表示，中日是亚洲和世界上有重要影响的国家。过去几年，中日关系走了一段弯路，其中的原因日方是清楚的。这一深刻教训值得认真总结。去年底以来，在双方共同努力下，两国关系逐步走出僵局，保持回稳势头。<span>播放</span></p>
+				</li>
+				<li>
+					<span>2</span>
+					<img src="img/2.png">
+					<p>李克强表示，中日是亚洲和世界上有重要影响的国家。过去几年，中日关系走了一段弯路，其中的原因日方是清楚的。这一深刻教训值得认真总结。去年底以来，在双方共同努力下，两国关系逐步走出僵局，保持回稳势头。<span>播放</span></p>
+				</li>
+				<li>
+					<span>3</span>
+					<img src="img/2.png">
+					<p>李克强表示，中日是亚洲和世界上有重要影响的国家。过去几年，中日关系走了一段弯路，其中的原因日方是清楚的。这一深刻教训值得认真总结。去年底以来，在双方共同努力下，两国关系逐步走出僵局，保持回稳势头。<span>播放</span></p>
+				</li>
+				<li>
+					<span>4</span>
+					<img src="img/2.png">
+					<p>李克强表示，中日是亚洲和世界上有重要影响的国家。过去几年，中日关系走了一段弯路，其中的原因日方是清楚的。这一深刻教训值得认真总结。去年底以来，在双方共同努力下，两国关系逐步走出僵局，保持回稳势头。<span>播放</span></p>
+				</li>
+				<li>
+					<span>5</span>
+					<img src="img/2.png">
+					<p>李克强表示，中日是亚洲和世界上有重要影响的国家。过去几年，中日关系走了一段弯路，其中的原因日方是清楚的。这一深刻教训值得认真总结。去年底以来，在双方共同努力下，两国关系逐步走出僵局，保持回稳势头。<span>播放</span></p>
+				</li>
+			</ul>
+		</div>
+
+		<div id="all">
+			<ul>
+				<li>
+					<span>1</span>
+					<img src="img/2.png" height="60" width="80">
+					<p>毋庸置疑，不管专职还是兼职，专车都具有为不特定消费者提供有偿服务的营运车辆性质。由此，乘客与专车司机间具有一定的人身依附关系<span>播放</span></p>
+				</li>
+				<li>
+					<span>2</span>
+					<img src="img/2.png">
+					<p>毋庸置疑，不管专职还是兼职，专车都具有为不特定消费者提供有偿服务的营运车辆性质。由此，乘客与专车司机间具有一定的人身依附关系<span>播放</span></p>
+				</li>
+				<li>
+					<span>3</span>
+					<img src="img/2.png">
+					<p>毋庸置疑，不管专职还是兼职，专车都具有为不特定消费者提供有偿服务的营运车辆性质。由此，乘客与专车司机间具有一定的人身依附关系<span>播放</span></p>
+				</li>
+				<li>
+					<span>4</span>
+					<img src="img/2.png">
+					<p>毋庸置疑，不管专职还是兼职，专车都具有为不特定消费者提供有偿服务的营运车辆性质。由此，乘客与专车司机间具有一定的人身依附关系<span>播放</span></p>
+				</li>
+				<li>
+					<span>5</span>
+					<img src="img/2.png">
+					<p>毋庸置疑，不管专职还是兼职，专车都具有为不特定消费者提供有偿服务的营运车辆性质。由此，乘客与专车司机间具有一定的人身依附关系<span>播放</span></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+	function show(oLi, aLi) {
+		var content = oLi.getElementsByTagName('p')[0];
+		var oSpan = oLi.getElementsByTagName('span')[1];
+		var oImg = oLi.getElementsByTagName('img')[0];
+		oLi.onmouseover = function() {
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].children[1].style.display = 'none';
+				aLi[i].className = '';
+				// dLi[i].children[2].children[0].style.display = 'none';
+			};
+			this.className = 'active';
+			oImg.style.display = 'block';
+			// oSpan.style.display = 'block';
+		}
+	}
+
+	var container = document.getElementById('container');
+	var aDiv = container.getElementsByTagName('div');
+	var headline = document.getElementById('headline')
+	var aSpan = headline.getElementsByTagName('span');
+	for (var i = 0; i < aSpan.length; i++) {
+		aSpan[i].index = i;
+		aSpan[i].onmouseover = function() {
+			for (var i = 0; i < aDiv.length; i++) {
+				aDiv[i].style.display = 'none';
+			};
+			aDiv[this.index].style.display = 'block';
+			var aLi = aDiv[this.index].getElementsByTagName('li')
+			for (var i = 0; i < aLi.length; i++) {
+				show(aLi[i], aLi);
+			};
+		}
+	}
+
+	var dLi = aDiv[0].getElementsByTagName('li');
+	for (var i = 0; i < dLi.length; i++) {
+		show(dLi[i], dLi)
+	}
+
+
+	</script>
+</body>
+</html>
