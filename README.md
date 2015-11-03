@@ -1,2 +1,2 @@
 # javascript
-exercises of javascript
+learn javascript
