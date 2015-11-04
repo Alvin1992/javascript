@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer function</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: yellow;
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn">click1</button>
+	<button id="btn1">click2</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	function doMove(obj, attr, speed, target, callback) {
+		if (obj.timer) {return}
+		var cur = parseFloat(getStyle(obj, attr));
+		speed = cur > target ? -Math.abs(speed) : Math.abs(speed);
+		obj.timer = setInterval(function() {
+			cur += speed;
+			if (speed > 0 && cur >= target || speed < 0 && cur <= target ) {
+				cur = target;
+				clearInterval(obj.timer);
+				obj.timer = null;
+				callback && callback();
+			}
+			obj.style[attr] = cur + 'px';
+		}, 30);
+
+
+	}
+	var btn = $('#btn');
+	var btn1 = $('#btn1')
+	var oDiv = $('#test');
+
+	btn.onclick = function() {
+		clearInterval(oDiv.timer);
+		oDiv.timer = null;
+		doMove(oDiv, 'left', 10, 400);
+	}
+
+	btn1.onclick = function() {
+		clearInterval(oDiv.timer);
+		oDiv.timer = null;
+		doMove(oDiv, 'left', 10, 0);
+	}
+
+	</script>
+</body>
+</html>
