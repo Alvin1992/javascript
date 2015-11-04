@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		position: absolute;
+		/*display: none;*/
+	}
+	</style>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+	//可传递一个包含js的字符串
+	var timer1 = setTimeout("alert('Hello World')", 50);
+	clearTimeout(timer1);
+
+	var timer1_1 = setInterval("alert('Hello World')", 50);
+	clearInterval(timer1_1);
+
+
+	// 传递函数
+	var timer2 = setTimeout(function() {alert('Hello World')}, 50);
+	clearTimeout(timer2);
+
+	var timer2_1 = setInterval(function() {alert('Hello World')}, 1000);
+	clearInterval(timer2_1);
+
+	//timerout 模拟 interval
+	/*var num = 0;
+	var max = 10;
+
+	function increcementNumber() {
+		num++;
+		if (num < max) {
+			console.log(num);
+			setTimeout(increcementNumber, 500);
+		} else {
+			alert('done');
+		}
+	}
+
+	setTimeout(increcementNumber, 500);*/
+
+	//setTimeout实例
+	var oBtn = $('#btn');
+	var oDiv = $('#test');
+	var timer = null;
+
+	/*oBtn.onmouseover = function() {
+		oDiv.style.display = 'block';
+	}
+
+	oBtn.onmouseout = function() {
+		timer = setTimeout(function(){
+			oDiv.style.display = 'none';
+		}, 50)
+	}
+
+	oDiv.onmouseover = function() {
+		clearTimeout(timer);
+	}
+
+	oDiv.onmouseout = function () {
+		this.style.display = 'none';
+	}*/
+
+	//setInterval实例
+
+	oBtn.onclick = function() {
+		clearInterval(timer);
+		var cur = parseFloat(getStyle(oDiv, 'left'));
+		timer = setInterval(function() {
+			cur += 5;
+			oDiv.style.left = cur + 'px';
+		}, 50);
+	}
+
+
+	</script>
+</body>
+</html>
