@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test for tools</title>
+	<style type="text/css">
+	#test {
+		width: 200px;
+		height: 200px;
+		background-color: #000;
+		color: #fff;
+	}
+	</style>
+</head>
+<body>
+	<div id="test">
+		<p>this is test content for tools</p>
+		<p>this is test content for tools</p>
+		<p>this is test content for tools</p>
+		<p>this is test content for tools</p>
+		<p>this is test content for tools</p>
+	</div>
+	<script type="text/javascript" src="tools.js"></script>
+	<script type="text/javascript">
+		var oDiv = $('#test');
+		var aP = $('p', oDiv);
+
+		console.log(oDiv);
+		console.log(aP.length);
+		console.log(getStyle(oDiv, 'width'));
+	</script>
+</body>
+</html>
