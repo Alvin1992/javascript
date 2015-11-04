@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeout</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		display: none;
+	}
+	</style>
+</head>
+<body>
+	<button>按纽</button>
+	<div id="test"></div>
+	<script type="text/javascript">
+	var oDiv = document.getElementById('test');
+	var oBtn = document.getElementsByTagName('button')[0];
+	var timer = null;
+
+	oBtn.onmouseover = function() {
+		oDiv.style.display = 'block';
+	}
+
+	oBtn.onmouseout = function() {
+		timer = setTimeout(function() {
+			oDiv.style.display = 'none';
+		}, 1000);
+	}
+
+	//如果元素有id，可直接用它来表示元素（测试用）。
+	// oDiv.onmouseover = function() {
+	// 	clearTimeout(timer);
+	// }
+
+	test.onmouseover = function() {
+		clearTimeout(timer);
+	}
+
+	oDiv.onmouseout = function() {
+		this.style.display = 'none';
+	}
+	</script>
+</body>
+</html>
