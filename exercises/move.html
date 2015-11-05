@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>按钮控制上下滚动</title>
+	<style type="text/css">
+		body, div, ul, li, p, h3 {
+			margin: 0;
+			padding: 0;
+		}
+
+		#container {
+			width: 200px;
+			height: 283px;
+			margin: 10px auto;
+			border: 1px solid #EDEDEB;
+			border-radius: 5px;
+			font-size: 12px;
+			font-family: "Palatino Linotype", Georgia, Arial, serif;
+			position: relative;
+		}
+
+		#container h3 {
+			height: 25px;
+			text-indent: 10px;
+			background: #3227F1;
+			border-radius: 5px 5px 0 0;
+			line-height: 25px;
+		}
+
+		#container h3 span {
+			float: right;
+			margin-right: 10px;
+		}
+
+		#container #inner {
+			position: relative;
+			height: 208px;
+			margin-top: 25px;
+			overflow: hidden;
+		}
+
+		#container #inner ul {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 20px 20px 0;
+			list-style-type: none;
+		}
+
+		#container #inner ul li {
+			border-bottom: 1px solid #ECEDE9;
+			overflow: hidden;
+			height: 50px;
+			padding: 10px 0;
+		}
+
+		#container #inner ul li p {
+			float: left;
+		}
+
+		#container #inner ul li img {
+			float: right;
+		}
+
+		#container #inner ul li p {
+			width: 50px;
+		}
+
+		#container > p {
+			width: 100%;
+			background: #CECECE;
+			position: absolute;
+			left: 0;
+			text-align: center;
+			height: 25px;
+			line-height: 25px;
+			cursor: pointer;
+			z-index: 9999;
+		}
+
+		#container .up {
+			top: 25px;
+		}
+
+		#container .down {
+			bottom: 0;
+		}
+
+		#container .clicked {
+			border: 1px dotted black;
+		}
+
+		#container > p span {
+			display: inline-block;
+			height: 20px;
+			line-height: 20px;
+			background: #656758;
+			color: white;
+			border-radius: 100%;
+		}
+	</style>
+	<script type="text/javascript" src="index.js"></script>
+</head>
+<body>
+	<div id="container">
+		<h3>妙味课堂<span>>>更多</span></h3>
+		<div id="inner">
+			<ul>
+			<li>
+				<p>无线网络基础</p>
+				<img src="../img/1.jpg" alt="">
+			</li>
+			<li>
+				<p>转移到Mac</p>
+				<img src="../img/2.jpg" alt="">
+			</li>
+			<li>
+				<p>从PC到Mac：基础知识</p>
+				<img src="../img/3.jpg" height="50" width="100" alt="">
+			</li>
+			<li>
+				<p>Mac完全解析</p>
+				<img src="../img/4.jpg" alt="">
+			</li>
+			<li>
+				<p>翻新笔记本</p>
+				<img src="../img/5.jpg" alt="">
+			</li>
+			<li>
+				<p>翻新台式机</p>
+				<img src="../img/6.jpg" alt="">
+			</li>
+			<li>
+				<p>翻新iPod</p>
+				<img src="../img/7.jpg" alt="">
+			</li>
+		</ul>
+		</div>
+		<p class="up"><span>△</span></p>
+		<p class="down"><span>▽</span></p>
+	</div>
+	<script type="text/javascript">
+			var container = document.getElementById("container");
+			var inner = document.getElementById("inner");
+			var oUl = inner.getElementsByTagName("ul")[0];
+			var down = container.lastChild.previousSibling;
+			var up = down.previousSibling.previousSibling;
+			var minTop = -(oUl.offsetHeight - inner.offsetHeight);
+			var timer = null;
+
+			up.onmousedown = function() {
+				startMove(minTop);
+			};
+
+			up.onmouseup = function() {
+				clearInterval(timer);
+			};
+
+			down.onmousedown = function() {
+				startMove(0);
+			};
+
+			down.onmouseup = function() {
+				clearInterval(timer);
+			};
+
+			function startMove(desPos) {
+				clearInterval(timer);
+				timer = setInterval(function() {
+					doMove(desPos);
+				}, 100);
+			}
+
+			function doMove(desPos) {
+				var curTop = oUl.offsetTop;
+				var iSpeed = (desPos - curTop) / 10;
+				iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+				oUl.style.top = oUl.offsetTop + iSpeed + "px";
+				oUl.offsetTop > 0 && (oUl.style.top = 0);
+				oUl.offsetTop < minTop && (oUl.style.top = minTop + "px");
+			}
+	</script>
+</body>
+</html>
