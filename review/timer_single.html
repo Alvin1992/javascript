@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer 3</title>
+	<style type="text/css">
+		#test {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		/*
+			目的是在运动的过程中，只有一个定时器在开启
+			先清除上一个定时器，然后再开启新的定时器
+			setTimeout不必如此
+			先清除，如果间隔值比较大会停住
+			解决方案：1.if (timer) return; 判断timer的值  2.if(!onOff) return  加开关
+			（不适用于两个按纽）
+
+			setTimeout不会停住
+		*/
+		var oBtn = $('#btn');
+		var oDiv = $('#test');
+		var timer = null,
+			target = 700,
+			speed = 18;
+			cur = parseFloat(getStyle(oDiv, 'left'));
+			onOff = false;
+		oBtn.onclick = function() {
+			clearInterval(timer);
+			timer = setInterval(function() {
+				cur += 20;
+				if (cur >= target) {
+					cur = target;
+					oDiv.style.left = cur + 'px';
+					clearInterval(timer);
+				}
+				oDiv.style.left = cur + 'px';
+			}, 500);
+
+
+			// if (!onOff) {
+			// 	onOff = true;
+			// 	moveToRight();
+			// }
+		}
+
+		/*function moveToRight() {
+			cur += 20;
+			timer = setTimeout(function() {
+				if ((cur + speed) <= target) {
+					moveToRight();
+				} else {
+					cur = target;
+				}
+				oDiv.style.left = cur + 'px';
+			}, 300);
+
+		}*/
+	</script>
+</body>
+</html>

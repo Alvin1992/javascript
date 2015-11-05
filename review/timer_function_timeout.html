@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer funtion by setTimeout</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn1">click me1</button><button id="btn2">click me2</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+	/* * * * * * * * * * * * * * * * * * * * *
+	 *    两个按纽，间隔值较大的话，依然停住     *
+	 * * * * * * * * * * * * * * * * * * * * */
+	function doMove(obj, attr, speed, target, fn) {
+		var cur = parseFloat(getStyle(obj, attr));
+		speed = cur > target ? -Math.abs(speed) : speed;
+		if (cur != target)  cur += speed;
+		obj.timer = setTimeout(function() {
+			if (Math.abs(cur - target) >= Math.abs(speed)) {
+				doMove(obj, attr, speed, target, fn);
+			} else {
+				cur = target;
+				fn && fn();
+			}
+			obj.style[attr] = cur + 'px';
+		}, 30);
+	}
+
+	var btn1 = $('#btn1'),
+		btn2 = $('#btn2'),
+		oDiv = $('#test');
+
+		btn1.onclick = function() {
+			clearTimeout(oDiv.timer);
+			doMove(oDiv, 'left', 17, 700);
+		}
+
+		btn2.onclick = function() {
+			clearTimeout(oDiv.timer);
+			doMove(oDiv, 'left', 17, 0);
+		}
+
+
+
+
+	</script>
+</body>
+</html>

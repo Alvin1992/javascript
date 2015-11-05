@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer 2</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn">click me</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		var oBtn = $('#btn');
+		var oDiv = $('#test');
+		var target = 600;
+		var cur = parseFloat(getStyle(oDiv, 'left')),
+			speed = 7;
+
+		oBtn.onclick = function() {
+			var timer = null;
+
+			// timer = setInterval(function() {
+			// 	cur += 10;
+			// 	if (cur >= target) {
+			// 		cur = target;
+			// 		clearInterval(timer);
+			// 	}
+			// 	oDiv.style.left = cur + 'px';
+			// }, 50);
+
+			moveToRight();
+		}
+
+		//用setTimeout模拟
+
+		function moveToRight() {
+				cur += speed;
+				timer =setTimeout(function() {
+					if ((cur + speed) <= target) {
+						moveToRight();
+					} else {
+						cur = target;
+						oDiv.style.left = cur + 'px';
+					}
+				}, 50);
+				oDiv.style.left = cur + 'px';
+			}
+	</script>
+</body>
+</html>

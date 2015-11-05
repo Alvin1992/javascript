@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>timer 3</title>
+	<style type="text/css">
+		#test {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<button id="btn1">click me1</button>
+	<div id="test"></div>
+
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+		var oBtn1 = $('#btn1'),
+			oDiv = $('#test'),
+			n = 0,
+			onOff = false;
+
+
+		//用timer的值判断
+		// oBtn1.onclick = function() {
+		// 	if (this.timer) return;
+		// 	this.timer = setInterval(function() {
+		// 		n += 10;
+		// 		oDiv.style.left = n + 'px';
+		// 	}, 300);
+		// }
+
+		//用开关
+		oBtn1.onclick = function() {
+			if (onOff) {return}
+			this.timer = setInterval(function() {
+				n += 10;
+				oDiv.style.left = n + 'px';
+			}, 300);
+			onOff = true;
+		}
+
+
+
+
+
+
+	</script>
+</body>
+</html>
