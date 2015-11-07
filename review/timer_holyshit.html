@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>return</title>
+	<style type="text/css">
+	#test1 {
+		width: 100px;
+		height: 100px;
+		background-color: #000;
+	}
+	</style>
+</head>
+<body>
+	<div id="test1"></div>
+	<script type="text/javascript">
+	//Maybe the naming of the multiple methods is just a convenience.
+	// var id = setTimeout(function(){ alert('hello'); }, 1000);
+	// clearInterval(id);
+	var id = setInterval(function(){ alert('hello'); }, 1000);
+	clearTimeout(id);
+	</script>
+</body>
+</html>
