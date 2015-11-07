@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>clock</title>
+	<style type="text/css">
+	#container {
+		width: 300px;
+		margin: 20px auto;
+	}
+
+	#hou {
+		color: #FE5C4A;
+	}
+
+	#min {
+		color: #40B419;
+	}
+
+	#sec {
+		color: #1F6CFF;
+	}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<button>start</button><button>stop</button>
+		<div class="clock">
+			<span id="hou">hh</span> : 
+			<span id="min">mm</span> : 
+			<span id="sec">ss</span>
+		</div>
+	</div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		var start = $('button', $('#container'))[0];
+		var stop = $('button', $('#container'))[1];
+		var hou = $('#hou'),
+			min = $('#min'),
+			sec = $('#sec'),
+			timer = null,
+			onOff = false;
+
+		start.onclick = function () {
+			clockStart();
+		}
+
+		stop.onclick = function() {
+			clockStop();
+		}
+
+		function clockStart() {
+			clearTimeout(timer);
+			update();
+			timer = setTimeout(clockStart, 1000);
+		}
+
+		function clockStop() {
+			clearTimeout(timer);
+		}
+
+
+		function update() {
+			var date = new Date();
+
+			var hous = date.getHours();
+			hou.innerHTML = addZero(hous);
+
+			var mins = date.getMinutes();
+			min.innerHTML = addZero(mins);
+
+			var secs = date.getSeconds();
+			sec.innerHTML = addZero(secs);
+
+		}
+
+		function addZero(num) {
+			num < 10 && (num = '0' + num);
+			return num;
+		}
+
+	</script>
+</body>
+</html>
