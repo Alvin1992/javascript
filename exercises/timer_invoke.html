@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>invoke</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		background-color: red;
+		position: absolute;
+		left: 0;
+		top: 50px;
+	}
+	</style>
+</head>
+<body>
+	<button id="btn1">click me1</button>
+	<button id="btn2">click me2</button>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	/*
+	 * 安排函数在未来的调用模式
+	 * 在等待了若干秒后调用f
+	 * 如果设置了interval而没有设置end，则无限调用f
+	 * 如果没有设置interval 和 end则只调用一次
+	 * 只有指定了f才会从start = 0 开始
+	 * 调用invoke不会阻塞，它会立即返回
+	 */
+	function invoke(f, start, interval, end) {
+		if (!start) {start = 0}     //默认设置为0毫秒
+		if (arguments.length < 3) {   //单次调用模式
+			setTimeout(f, start);   //若干毫秒后的单次调用模式
+		} else {                    //多次调用模式
+			setTimeout(repeat, start);      //若干毫秒后调用repeat
+		}
+		//此处不能把repeat函数写在else里面，火狐在这方面的处理和chrome不一样
+		//http://www.w3help.org/zh-cn/causes/SJ9002
+		//var repeat = function() {
+			// 	var h = setInterval(f, interval);
+			// 	if (end) {setTimeout(function() {clearInterval(h)}, end)};
+			// }
+		//可以这样写，但是要放在setTimeout前面
+		function repeat() {
+			var h = setInterval(f, interval);   //循环调用f
+			if (end) {setTimeout(function() {clearInterval(h)}, end)}; //如果设置了end，则在若干毫秒后会停止
+		};
+	}
+
+	var btn1 = $('#btn1'),
+		btn2 = $('#btn2'),
+		oDiv = $('#test');
+
+
+		btn1.onclick = function() {
+			//此处fn得包含在另一个里面，如果像下这样写就不行。
+			//invoke(doMove(oDiv, 'left', 10, 500, function() {
+			// doMove(oDiv, 'top', 10, 500, function() {
+			// 	doMove(oDiv, 'left', 10, 0, function() {
+			// 		doMove(oDiv, 'top', 10, 50);
+			// 		});
+			// 	});
+			// }), 0, 7000)
+			//因为doMove这个函数在执行完就被销毁了，所以一直执行的都是最后的那个callback
+			invoke(fn, 0, 7000)
+		}
+
+
+
+	 function fn() {
+	 	doMove(oDiv, 'left', 10, 500, function() {
+			doMove(oDiv, 'top', 10, 500, function() {
+				doMove(oDiv, 'left', 10, 0, function() {
+					doMove(oDiv, 'top', 10, 50);
+					});
+				});
+			})
+	 }
+	</script>
+</body>
+</html>
