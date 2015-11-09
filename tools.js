@@ -59,6 +59,8 @@ function invoke(f, start, interval, end) {
 	}
 }
 
+
+
 function shake(obj, attr, speed, callback) {
 	if (obj.timer) return;
 	var cur = parseFloat(getStyle(obj, attr)),
