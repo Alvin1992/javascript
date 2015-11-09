@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>digital clock</title>
+	<style type="text/css">
+		.container img {
+			position: relative;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<img src="../img/0.png" alt="">
+		<img src="../img/0.png" alt="">
+		<img src="../img/sc.png" alt="">
+		<img src="../img/0.png" alt="">
+		<img src="../img/0.png" alt="">
+		<img src="../img/sc.png" alt="">
+		<img src="../img/0.png" alt="">
+		<img src="../img/0.png" alt="">
+	</div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		//加前面的的0
+		function addZero(num) {
+			if (num < 10) {
+				return '0' + num;
+			} else {
+				return num;
+			}
+		}
+
+		//获取时间
+		function getTimes(aObj) {
+			var curTime = new Date();
+
+			h = curTime.getHours();
+			m = curTime.getMinutes();
+			s = curTime.getSeconds();
+
+			curTime = addZero(h) + ':' + addZero(m) + ':' + addZero(s);
+
+			for (var i = 0; i < curTime.length; i++) {
+				//为冒号设置闪动
+				if (curTime.charAt(i) == ':') {
+					(function(m) {
+						aObj[m].src = '../img/c.png';
+						setTimeout(function() {
+							aObj[m].src = '../img/nc.png';
+						}, 500);
+					})(i);
+				} else {
+					aObj[i].src = '../img/'+ curTime[i] +'.png';
+				}
+			}
+
+			//与上一次的值进行比较，不同的就抖一抖
+
+			if (preTime != '') {
+				for (var j = 0; j < curTime.length; j++) {
+					if (curTime.charAt(j) !== preTime.charAt(j)) {
+						shake(aObj[j], 'top', 20);
+					}
+				}
+			}
+
+			//保存当前值
+			preTime = curTime;
+
+		}
+
+		var aImg = $('img'),
+			preTime = '';//保存上次的时间，以便比较
+		//先调用一次，防止第一次等待
+		getTimes(aImg);
+		setInterval(function() {
+			getTimes(aImg);
+		}, 1000);
+	</script>
+</body>
+</html>
