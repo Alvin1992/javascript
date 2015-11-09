@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>namespace</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var _ = '自定义变量';
+	</script>
+	<script type="text/javascript" src="underscore.js"></script>
+	<script type="text/javascript">
+	// console.dir(_);
+
+	var us = _.noConflict();
+
+	console.dir(_);
+
+	// console.dir(us);
+	</script>
+</body>
+</html>

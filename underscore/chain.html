@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>chain</title>
+</head>
+<body>
+	<script type="text/javascript" src="underscore.js"></script>
+	<script type="text/javascript">
+		var arr = [10, 20, 30];
+		console.log(_(arr)
+			.chain()
+			.map(function(elem) {return elem + 3;})
+			.first()
+			.value())
+	</script>
+</body>
+</html>
