@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>function shake</title>
+	<style type="text/css">
+		#test {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			left: 100px;
+			top: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		function shake(obj, attr, speed, callback) {
+			//此处不能用doMove函数那种形式（直接清除定时器）
+			//如果再次移动到元素上
+			//这时会在清除定时器的位置重新计算cur和n
+			//解决办法：将cur和n放到函数外，同时在定时器执行完之后将n设为0
+			if (obj.timer) return;
+			var cur = parseFloat(getStyle(obj, attr)),
+				arr = [],
+				n = 0;
+			speed > 40 && (speed = 40);
+			speed < 3 && (speed = 3);
+			for (var i = speed; i > 0; i -= 3) {
+				arr.push(i, -i);
+			};
+			arr.push(0);
+
+			obj.timer = setInterval(function() {
+				obj.style[attr] = cur + arr[n] + 'px';
+				n++;
+				if (n > arr.length - 1) {
+					clearInterval(obj.timer);
+					obj.timer = null;
+					callback && callback();
+				}
+			}, 30);
+		}
+
+		var test = $('#test');
+		test.onmouseover = function() {
+			shake(this, 'left', 100, function() {
+				alert('抖动完成');
+			})
+		}
+	</script>
+</body>
+</html>
