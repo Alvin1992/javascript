@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>date basics</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//获取当前系统时间
+		var curTime = new Date();
+		console.log(curTime);
+
+
+		//方法
+
+		var y = curTime.getFullYear();
+		var m = curTime.getMonth();
+		var d = curTime.getDate();
+		var w = curTime.getDay();
+		var h = curTime.getHours();
+		var min = curTime.getMinutes();
+		var s = curTime.getSeconds();
+		var arr = ['日', '一', '二', '三', '四', '五', '六'];
+		var time = y + '年' + m + '月' + d + '日' + '星期' +arr[w] + h + ':' + min + ':' + s;
+		console.log(time);
+
+
+		function addZero(num) {
+			num < 10 && (num = '0' + num);
+			return num;
+		}
+
+		time = y + '年' + m + '月' + d + '日' + '星期' +arr[w] + addZero(h) + ':' + addZero(min) + ':' + addZero(s);
+
+		console.log(time);
+	</script>
+</body>
+</html>
