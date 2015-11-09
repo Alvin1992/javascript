@@ -59,7 +59,29 @@ function invoke(f, start, interval, end) {
 	}
 }
 
+function shake(obj, attr, speed, callback) {
+	if (obj.timer) return;
+	var cur = parseFloat(getStyle(obj, attr)),
+		arr = [],
+		n = 0;
+	speed > 40 && (speed = 40);
+	speed < 3 && (speed = 3);
 
+	for (var i = speed; i > 0; i -= 3) {
+		arr.push(i, -i);
+	};
+	arr.push(0);
+
+	obj.timer = setInterval(function() {
+		obj.style[attr] = cur + arr[n] + 'px';
+		n++;
+		if (n > arr.length - 1) {
+			clearInterval(obj.timer);
+			obj.timer = null;
+			callback && callback();
+		}
+	}, 30);
+}
 
 
 
