@@ -18,7 +18,6 @@ function getStyle(obj, attr) {
 }
 
 
-
 function doMove(obj, attr, speed, target, fn) {
 
 	clearInterval(obj.timer);
@@ -35,12 +34,14 @@ function doMove(obj, attr, speed, target, fn) {
 
 			cur = target;
 
-			clearInterval(obj.timer);
-			//先执行了回调函数，从但是后面依然会赋值，因为是两个作用域。
-			fn && fn();
-		}
+			obj.style[attr] = cur + 'px';
 
-		obj.style[attr] = cur + 'px';
+			clearInterval(obj.timer);
+
+			fn && fn();
+		} else {
+			obj.style[attr] = cur + 'px';
+		}
 
 	}, 30);
 }
