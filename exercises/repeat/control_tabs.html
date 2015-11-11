@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>control two groups</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	.wrap {
+		width: 960px;
+		margin: 0 auto;
+		position: relative;
+		background-color: blue;
+	}
+
+	.wrap div {
+		position: absolute;
+	}
+
+	.container1 {
+		top: 20px;
+		left: 0;
+	}
+
+	.container2 {
+		top: 20px;
+		right: 0;
+	}
+
+	p {
+		position: absolute;
+	}
+
+	#title1, #title2 {
+		left: 80px;
+		bottom: -20px;
+	}
+
+	#contents-number1, #contents-number2 {
+		left: 0;
+		bottom: -10;
+	}
+
+	a {
+		position: absolute;
+		width: 30px;
+		height: 30px;
+		text-decoration: none;
+		color: #000;
+		background-color: #fff;
+		opacity: 0.3;
+		font-size: 30px;
+		line-height: 30px;
+		text-align: center;
+	}
+
+	.bar1 {
+		left: 5px;
+		top: 135px;
+	}
+
+	.bar2 {
+		right: 5px;
+		top: 135px;
+	}
+
+	a:hover {
+		opacity: 1;
+	}
+
+	img {
+		width: 250px;
+		height: 400px;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="control-bar">
+			<button id="pre">上一组</button><button id="next">下一组</button>
+		</div>
+		<div class="container1">
+			<img id="presentation1" src="../../img/miss1.jpg">
+			<p id = "title1">第一组第1张</p>
+			<p id="contents-number1">1 / 4</p>
+			<a href="javascript:;" class="bar1"><</a><a class="bar2" href="javascript:;">></a>
+		</div>
+		<div class="container2">
+			<img id="presentation2" src="../../img/m1.jpg">
+			<p id = "title2">第二组第1张</p>
+			<p id="contents-number2">1 / 3</p>
+			<a href="javascript:;" class="bar1"><</a><a href="javascript:;"class="bar2">></a>
+		</div>
+	</div>
+	<script type="text/javascript" src="../../tools.js"></script>
+	<script type="text/javascript">
+
+	var preGroup = $('#pre'),
+		nexGroup = $('#next'),
+		presentation1 = $('#presentation1'),
+		presentation2 = $('#presentation2'),
+		title1 = $('#title1'),
+		title2 = $('#title2'),
+		number1 = $('#contents-number1'),
+		number2 = $('#contents-number2'),
+		aLink = $('a'),
+		count1 = 0,
+		count2 = 0;
+
+
+		function doTheCommon(presentation, title, number, count, s) {
+			var x = '',
+				y = '',
+				z = '';
+			x = s ? 'miss' : 'm';
+			y = s ? '第一组第' : '第二组第';
+			z = s ? ' / 4' : ' / 3';
+			presentation.src = '../../img/' + x + (count+1) + '.jpg';
+			title.innerHTML = y + (count+1) +'张';
+			number.innerHTML = (count+1) + z;
+		}
+
+		aLink[0].onclick = function() {
+			count1--;
+			count1 < 0 && (count1 = 3);
+			doTheCommon(presentation1, title1, number1, count1, true);
+		}
+
+		aLink[1].onclick = function() {
+			count1++;
+			count1 > 3 && (count1 = 0);
+			doTheCommon(presentation1, title1, number1, count1, true);
+		}
+
+		aLink[2].onclick = function() {
+			count2--;
+			count2 < 0 && (count2 = 2);
+			doTheCommon(presentation2, title2, number2, count2, false);
+		}
+
+		aLink[3].onclick = function() {
+			count2++;
+			count2 > 2 && (count2 = 0);
+			doTheCommon(presentation2, title2, number2, count2, false);
+		}
+
+		preGroup.onclick = function() {
+			count1--;
+			count2--;
+			count1 < 0 && (count1 = 3);
+			count2 < 0 && (count2 = 2);
+			doTheCommon(presentation1, title1, number1, count1, true);
+			doTheCommon(presentation2, title2, number2, count2, false);
+		}
+
+		nexGroup.onclick = function() {
+			count1++;
+			count1 > 3 && (count1 = 0);
+			count2++;
+			count2 > 2 && (count2 = 0);
+			doTheCommon(presentation1, title1, number1, count1, true);
+			doTheCommon(presentation2, title2, number2, count2, false);
+		}
+
+	</script>
+</body>
+</html>
