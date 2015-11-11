@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select all</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 300px;
+		margin: 20px auto;
+	}
+
+	li {
+		list-style-type: none;
+		width: 200px;
+		height: 30px;
+		line-height: 30px;
+	}
+
+	li:nth-child(2n) {
+		background-color: #40FE0E;
+	}
+
+	li:nth-child(2n+1) {
+		background-color: #FE3CFC;
+	}
+
+	li:hover {
+		background-color: #666;
+	}
+
+	input {
+		margin-right: 10px;
+	}
+
+	.select {
+		background-color: #666 !important;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<ul id="container">
+			<li><input type="checkbox" name="song">私奔</li>
+			<li><input type="checkbox" name="song">北京北京</li>
+			<li><input type="checkbox" name="song">我爱你中国</li>
+			<li><input type="checkbox" name="song">花火</li>
+			<li><input type="checkbox" name="song">回来</li>
+			<li><input type="checkbox" name="song">爱要有你才完整</li>
+		</ul>
+		<p><input id="select-all" type="checkbox" name="song">全选</p>
+	</div>
+	<script type="text/javascript" src="../../tools.js"></script>
+	<script type="text/javascript">
+	var aSong = $('input', $('#container'))
+		aLi = $('li', $('#container')),
+		selectAll = $('#select-all');
+
+		for (var i = 0; i < aSong.length; i++) {
+			aSong[i].index = i;
+			aSong[i].onclick = function() {
+				var count = 0
+				if (this.checked) {
+					aLi[this.index].className = 'select';
+				} else {
+					aLi[this.index].className = '';
+				}
+
+				for (var i = 0; i < aSong.length; i++) {
+					if (aSong[i].checked) {
+						count++;
+					}
+				}
+
+				count == 6 ? selectAll.checked = true : selectAll.checked = false;
+			}
+		}
+
+		selectAll.onclick = function() {
+
+			if (this.checked) {
+				for (var i = 0; i < aSong.length; i++) {
+					aSong[i].checked = true;
+					aLi[i].className = 'select';
+				}
+			} else {
+				for (var i = 0; i < aSong.length; i++) {
+					aSong[i].checked = false;
+					aLi[i].className = '';
+				};
+			}
+
+
+
+		}
+
+	</script>
+</body>
+</html>
