@@ -33,6 +33,36 @@
 		time = y + '年' + m + '月' + d + '日' + '星期' +arr[w] + addZero(h) + ':' + addZero(min) + ':' + addZero(s);
 
 		console.log(time);
+
+
+		// var testDate = new Date(Date.parse('11/12/2015'));
+		// var testDate = new Date(Date.parse('Nov 12, 2015'));
+		// var testDate = new Date(Date.parse('Thu Nov 12 2015 10:44:00'));
+		var testDate = new Date(Date.parse('2015-11-12T10:46:00'));
+		var test = Date.parse('');
+		var testDate1 = new Date('2015-11-12T10:50:00');
+		var overvlueDate = new Date('10/43/2015');
+		var dateUtc = new Date(Date.UTC(2015, 10, 12, 11, 1, 25));
+		var dateUtc1 = new Date(Date.UTC(2015, 10));
+		var utc = Date.UTC(2015, 10, 12, 11, 1, 25);
+		var dateUseNum = new Date(2015, 10, 12, 11, 1, 25);
+
+
+		var start = Date.now();
+		time = y + '年' + m + '月' + d + '日' + '星期' +arr[w] + addZero(h) + ':' + addZero(min) + ':' + addZero(s);
+		var stop = Date.now();
+		var result = stop - start;
+
+		console.log('result: ' + result);
+
+		console.log(test);
+		console.log(testDate);
+		console.log(testDate1);
+		console.log(overvlueDate);
+		console.log(dateUtc);
+		console.log(dateUtc1);
+		console.log(utc);
+		console.log(dateUseNum);
 	</script>
 </body>
 </html>
