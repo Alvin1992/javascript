@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>countdown</title>
+	<style type="text/css">
+	#container {
+		width: 500px;
+		margin: 20px auto;
+	}
+
+	input {
+		width: 300px;
+	}
+	</style>
+</head>
+<body>
+	<div id="container">
+		距离：<input type="text" value="Nov 12 2015 19:40"><br>
+		还有：<input type="text" value="">
+		<button>开始倒计时</button>
+	</div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	/*var aInput = $('input'),
+		btn = $('button')[0],
+		timer = null,
+		tFuture = 0;
+
+	btn.onclick = function() {
+		clearInterval(timer);
+		tFuture = new Date(aInput[0].value);
+		computTime();
+		timer = setInterval(computTime, 1000);
+	}
+
+	function computTime() {
+		var	tCur = new Date(),
+			diff = Math.floor((tFuture - tCur) / 1000),
+			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 86400 % 3600 % 60) + '秒';
+		if (diff < 0) {
+			clearInterval(timer);
+			return;
+		}
+
+		aInput[1].value = strDiffTime;
+	}*/
+
+
+
+	var aInput = $('input'),
+		btn = $('button')[0],
+		tFuture = 0;
+
+	btn.onclick = function() {
+		tFuture = new Date(aInput[0].value);
+		computTime();
+	}
+
+	function computTime() {
+		var	tCur = new Date(),
+			diff = Math.floor((tFuture - tCur) / 1000),
+			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 86400 % 3600 % 60) + '秒';
+		aInput[1].value = strDiffTime;
+		if (diff > 0) {
+			setTimeout(computTime, 1000);
+		}
+	}
+
+
+	</script>
+</body>
+</html>
