@@ -37,7 +37,7 @@
 	function computTime() {
 		var	tCur = new Date(),
 			diff = Math.floor((tFuture - tCur) / 1000),
-			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 86400 % 3600 % 60) + '秒';
+			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 60) + '秒';
 		if (diff < 0) {
 			clearInterval(timer);
 			return;
@@ -60,13 +60,12 @@
 	function computTime() {
 		var	tCur = new Date(),
 			diff = Math.floor((tFuture - tCur) / 1000),
-			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 86400 % 3600 % 60) + '秒';
+			strDiffTime = Math.floor(diff / 86400) + '天' + Math.floor(diff % 86400 / 3600) + '时' + Math.floor(diff % 86400 % 3600 / 60) + '分' + Math.floor(diff % 60) + '秒';
 		aInput[1].value = strDiffTime;
 		if (diff > 0) {
 			setTimeout(computTime, 1000);
 		}
 	}
-
 
 	</script>
 </body>
