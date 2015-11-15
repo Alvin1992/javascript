@@ -1,0 +1,192 @@
+body, div, p, input, a, ul, li, button, img {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
+  float: left;
+}
+
+.header {
+  width: 761px;
+  margin: 10px auto;
+  overflow: hidden;
+}
+
+.header .post {
+  width: 520px;
+  float: left;
+  font-size: 14px;
+  margin-right: 20px;
+}
+
+.header .post a {
+  color: #9b9b9b;
+  width:31px;
+  height: 20px;
+  line-height: 20px;
+  padding-left: 16px;
+}
+
+.header .post input {
+  width: 100%;
+  height: 51px;
+  border: none;
+  font-size: 16px;
+  background: url(input_520X51.png) no-repeat 0 0 #fff;
+}
+
+.header .post .type {
+  margin-top: 10px;
+}
+
+.header .post li {
+  width: 47px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.header .post li {
+  float: left;
+  width: 47px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.header .post li:nth-child(1) {
+  background: url(emoj_16X13.png) no-repeat 0 2px #fff;
+}
+
+.header .post li:nth-child(2) {
+  background: url(pic_16X14.png) no-repeat 0 2px #fff;
+}
+
+.header .post li:nth-child(3) {
+  background: url(music_16X14.png) no-repeat 0 2px #fff;
+}
+
+.header .post li:nth-child(4) {
+  background: url(video_16X14.png) no-repeat 0 1px #fff;
+}
+
+.header .post li:nth-child(5) {
+  background: url(template_16X16.png) no-repeat 0 1px #fff;
+}
+
+.header .post li:nth-child(6) {
+  background: url(more_5X10.png) no-repeat 0 2px #fff;
+}
+
+.header .post li:nth-child(6) a {
+  padding-left: 8px;
+}
+
+.header .post button {
+  width: 68px;
+  height: 28px;
+  background: url(post_button68X28.png);
+  float: right;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+}
+
+.header .other-func {
+  width: 220px;
+  float: left;
+}
+
+.header .other-func p {
+  width: 206px;
+  height: 40px;
+  padding: 7px;
+  background: url(calender_220X54.png) no-repeat 0 0 ;
+}
+
+.header .other-func p span {
+  font-size: 16px;
+  position: relative;
+}
+
+.header .other-func p span:before {
+  position: absolute;
+  font-size: 14px;
+  top: -24px;
+  left: 0;
+}
+
+.header .other-func p span:first-child {
+  margin-right: 5px;
+}
+
+.header .other-func p span:first-child:before {
+  content: '01.15'
+}
+
+.header .other-func p span:last-child:before {
+  content: 'DAY';
+}
+
+.header .other-func p button {
+  background: url(sign_in96X36.png);
+  width: 96px;
+  height: 36px;
+  border: none;
+  font-size: 16px;
+  vertical-align: top;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.header .other-func ul {
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.header .other-func ul li {
+  margin-right: 10px;
+}
+
+.header .other-func li:nth-child(1) {
+  background: url(post_15X14.png) no-repeat 0 2px #fff;
+}
+
+.header .other-func li:nth-child(2) {
+  background: url(upload_pic_16X14.png) no-repeat 0 2px #fff;
+}
+
+.header .other-func li:nth-child(3) {
+  margin-top: -4px;
+  margin-right: 0;
+  background: url(post_video_24X20.png) no-repeat 0 0 #fff;
+}
+
+.header .other-func li a {
+  color: #444444;
+  width: 44px;
+  font-size: 14px;
+  padding-left: 16px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.header .other-func li:nth-child(3) a {
+  padding-left: 24px;
+  width: 44px;
+  line-height: 28px;
+}
+
+
+
+
+
+
+
+
