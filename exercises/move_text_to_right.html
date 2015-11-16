@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>move text to right</title>
+	<style type="text/css">
+	div, p, ul, li {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 800px;
+		margin: 0 auto;
+		border: 5px solid #ccc;
+		overflow: hidden;
+	}
+
+	.wrap div {
+		float: left;
+		margin-right: 10px;
+	}
+
+	#input textarea, #output p {
+		width: 300px;
+		height: 300px;
+		border: 1px dotted #000;
+		/*overflow: scroll;*/
+	}
+
+	#manipulate {
+		margin: 0 20px;
+	}
+
+	#manipulate p {
+		margin-top: 20px;
+	}
+
+	#manipulate ul {
+		overflow: hidden;
+	}
+
+	li {
+		list-style-type: none;
+		width: 20px;
+		height: 20px;
+		background-color: orange;
+		float: left;
+		margin-right: 3px;
+	}
+
+	.select {
+		background-color: red;
+	}
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div id="input">
+			<textarea></textarea>
+		</div>
+		<div id="manipulate">
+			<button>把文字右移</button>
+			<p><span>0</span>/<span>0</span></p>
+			<ul id="progress">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div id="output">
+			<p></p>
+		</div>
+	</div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+	var move = $('button', $('#manipulate'))[0],
+		aSpan = $('span', $('#manipulate')),
+		oInput = $('textarea', $('#input'))[0],
+		oOutput = $('p', $('#output'))[0],
+		aLi = $('li'),
+		oUl = $('ul')[0];
+
+
+	move.onclick = function() {
+		var valueOfLeft = oInput.value,
+			valueOfRight = '',
+			that = this;
+		aSpan[1].innerHTML = valueOfLeft.length;
+		if (!that.onOff) {
+			oOutput.innerHTML = '';
+			oUl.style.display = 'block';
+			moveText();
+			that.onOff = true;
+		}
+
+		function moveText() {
+			var text = oInput.value,
+			valueOfRight = text.substring(0, 1),
+			valueOfLeft = text.substring(1);
+			for (var i = 0; i < aLi.length; i++) {
+				aLi[i].className = '';
+			}
+			aLi[text.length%5].className = 'select';
+			aSpan[0].innerHTML = valueOfLeft.length;
+			oInput.value = valueOfLeft;
+			oOutput.innerHTML += valueOfRight;
+			if (valueOfLeft.length > 0) {
+				setTimeout(moveText, 100);
+			} else {
+				that.onOff = false;
+				oUl.style.display = 'none';
+			}
+		}
+
+	}
+
+
+	</script>
+</body>
+</html>
