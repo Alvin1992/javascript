@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>indexOf</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*var str = 'abadhfathaoiayuhgda',
+		nextPos = 0,
+		curPos = 0,
+		arr = [];
+	for (var i = 0; i < str.length; i++) {
+		if (str.indexOf('a', nextPos) != -1) {
+			curPos = str.indexOf('a', nextPos);
+			arr.push(curPos);
+			nextPos = curPos + 1;
+		}
+	}
+
+	console.log(str, arr);*/
+
+	var str = 'abadhfathaoiayuhgda',
+		nextPos = 0,
+		curPos = 0,
+		arr = [];
+
+	while (str.indexOf('a', nextPos) != -1) {
+		curPos = str.indexOf('a', nextPos);
+		arr.push(curPos);
+		nextPos = curPos + 1;
+	}
+
+	console.log(arr);
+	</script>
+</body>
+</html>
