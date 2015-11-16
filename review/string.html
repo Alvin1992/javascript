@@ -43,14 +43,17 @@
 	console.group('substring方法');
 	console.log(str.substring());
 	console.log(str.substring(16));
-	//不接收负值，直接返回整个字符串
+	//负值转为零，直接返回整个字符串
 	console.log(str.substring(-5));
 	console.log(str.substring(str.length + 10));
 	console.log(str.substring(1, 5));
 	console.log(str.substring(1, 1));
+	//会自动调整位置
 	console.log(str.substring(5, 1));
-	//返回空字符串
+	//负值全部为零，返回空字符串
 	console.log(str.substring(-5, -7));
+	//先调整位置，然后将负值转为零
+	console.log(str.substring(3, -1));
 	console.groupEnd();
 
 
