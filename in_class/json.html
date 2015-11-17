@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>json</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var arr = [
+				{
+					user:"leo",
+					sex:"男",
+					age:30,
+					job:["CEO","programmer"]
+				},
+				{
+					user:"momo",
+					sex:"nv",
+					age:25
+				}
+			];
+		var arrResult1 = [],
+			arrResult2 = [];
+		for (var i = 0; i < arr.length; i++) {
+			if (i == 0) {
+				for (var attr in arr[i]) {
+					arrResult1.push(arr[i][attr]);
+				}
+			}
+			if (i == 1) {
+				for (var attr in arr[i]) {
+					arrResult2.push(arr[i][attr]);
+				}
+			}
+		}
+
+		document.body.innerHTML = arrResult1.join() +'<br />' + arrResult2.join();
+	</script>
+</body>
+</html>
