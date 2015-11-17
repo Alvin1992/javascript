@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSON</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//json的key值必须用双引号引起来，javascript的不需要
+	var json = '{"name": "Alvin","age": 23}';
+
+	console.log(json);
+
+
+	//原生inspector可以打印出，但是firebug显示不出来
+	//console.dir(JSON);
+
+	var parsedJson = JSON.parse(json);
+	console.log(parsedJson);
+
+	//一共可接收三个参数，第二个参数是一个数组或者对象，如果同时写第二个没有
+	//效果，因为第三个参数应该是格式化的参数（数字或者字符串），最大是10个字符长度。
+	var parsedJson1 = JSON.parse(json, function(k, v) {
+		if (k === 'name') {
+			v = 'Kate';
+		}
+		return v;
+	});
+	console.log(parsedJson1);
+
+
+	var obj = {
+		name: 'Kate',
+		gender: 'female',
+		height: 170
+	}
+
+	var json1 = JSON.stringify(obj, ['name', 'gender']);
+	console.log(json1);
+
+	var json2 = JSON.stringify(obj);
+	console.log(json2);
+
+	var json3 = JSON.stringify(obj, function(k,v) {
+		if (k == 'height') {
+			v = 177;
+		}
+		return v;
+	});
+	console.log(json3);
+
+
+
+	var json4 = JSON.stringify(obj, []);
+	console.log(json4);
+
+	var json5 = JSON.stringify(obj, ['name', 'gender'], function(k, v) {
+		if (k == 'name') {
+			v = 'Alvin';
+		}
+		return v;
+	});
+	console.log(json5);
+
+	var json6 = JSON.stringify(obj,function(k, v) {
+		if (k == 'name') {
+			v = 'Alvin';
+		}
+		return v;
+	}, ['name', 'gender'], 4);
+	console.log(json6);
+
+	var json7 = JSON.stringify(obj,function(k, v) {
+		if (k == 'name') {
+			v = 'Alvin';
+		}
+		return v;
+	}, 4);
+	console.log(json7);
+
+
+	//遍历对象用for in
+	var arr = [];
+	for (var attr in obj) {
+		arr.push(obj[attr]);
+	}
+	console.log(arr);
+	</script>
+</body>
+</html>
