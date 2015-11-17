@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>search and replace</title>
+	<style type="text/css">
+		body, div, section, ul, li, h2, p{
+		  margin: 0;
+		  padding: 0;
+		}
+
+		.func {
+			width: 500px;
+			margin: 10px auto;
+			*zoom: 1;
+		}
+
+		.func:after {
+			content: '';
+			display: block;
+			height: 0;
+			clear: both;
+		}
+
+		.func div, .func ul {
+			float: left;
+		}
+
+		#content {
+			width: 400px;
+			margin-right: 20px;
+		}
+
+		.func .nav li {
+			font-size: 16px;
+			width: 60px;
+			height: 40px;
+			background-color: #999;
+			color: #000;
+			list-style-type: none;
+			text-align: center;
+			line-height: 40px;
+			margin-bottom: 5px;
+			cursor: pointer;
+			display: none;
+		}
+
+		.func .nav li:first-child {
+			display: block;
+		}
+
+		.func .nav li ~ li:hover {
+			background-color: red;
+		}
+
+		.func .panel {
+			width: 450px;
+			height: 200px;
+			border: 5px solid #FF34C1;
+			background-color: #F6F6A4;
+			display: none;
+		}
+
+		.func .panel h2 {
+			width: 400px;
+			height: 30px;
+			position: relative;
+			font-weight: normal;
+			font-size: 16px;
+			border-bottom: 2px solid red;
+			margin: 10px auto;
+		}
+
+		#close {
+			position: absolute;
+			right: -15px;
+			top: -5px;
+		}
+
+		.func .panel h2 span {
+			display: inline-block;
+			width: 50px;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			cursor: pointer;
+		}
+
+		.select {
+			background-color: red;
+		}
+
+		#search, #replace {
+			margin-left: 20px;
+			margin-top: 40px;
+			display: none;
+		}
+
+		#search input, #replace input {
+			margin: 0 10px;
+		}
+
+		#close {
+			cursor: pointer;
+		}
+
+		.searchText {
+			background-color: yellow;
+			font-weight: normal;
+		}
+
+		.replaceText {
+			background-color: red;
+			font-weight: normal;
+		}
+	</style>
+</head>
+<body>
+	<section class="func">
+		<div id="content">
+			<p>
+				据报道，阿巴乌德的父亲在摩洛哥经商，一家人其后移居比利时布鲁塞尔莫伦贝克，他入读当地一间著名中学。阿巴乌德2013年赴叙作战，曾于IS的短片亮相。他与欧洲的激进人士关系甚密，“恐袭三兄弟”中的卜拉欣2010年便曾与他一同犯案。报道称，阿巴乌德2015年1月策划袭击比利时警察，但遭情报部门发现，警方于东部城市韦尔维耶捣破该批极端分子的巢穴，并通缉阿巴乌德。然而他继续指挥欧洲的支持者施袭，包括2015年4月企图袭击巴黎一间教堂，8月时又指示枪手登上一列开往巴黎的“大力士”火车，企图大开杀戒，但皆未能得逞。(实习编辑：彭海艳 审核：谭利娅)
+			</p>
+		</div>
+		<ul class="nav">
+			<li>展开</li>
+			<li>查找</li>
+			<li>替换</li>
+		</ul>
+		<div class="panel">
+			<h2><span>查找</span><span>替换</span><strong id="close">X</strong></h2>
+			<div id="search">
+				<input type="text"><button>查找</button>
+			</div>
+			<div id="replace">
+				<input type="text"><input type="text"><button>替换</button>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+	var aLi = $('li'),
+		panel = $('div')[1],
+		aDiv = $('div', panel);
+		aSpan = $('span', panel),
+		search = $('#search'),
+		replace = $('#replace'),
+		searchBtn = $('button', search)[0],
+		searchInput = $('input', search)[0],
+		replaceBtn = $('button', replace)[0],
+		aReplaceInput = $('input', replace),
+		close = $('#close'),
+		oP = $('p')[0],
+		newText = oP.innerHTML;
+
+
+	aLi[0].onclick = function() {
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].style.display = 'block';
+		}
+	}
+
+	for (var i = 1; i < aLi.length; i++) {
+		aLi[i].index = i;
+		aLi[i].onclick = function() {
+			for (var i = 1; i < aLi.length; i++) {
+				aLi[i].style.display = 'none';
+				aDiv[i-1].style.display = 'none';
+				aSpan[i-1].className = '';
+			}
+			panel.style.display = 'block';
+			aDiv[this.index-1].style.display = 'block';
+			aSpan[this.index-1].className = 'select';
+		}
+	}
+
+	close.onclick = function() {
+		panel.style.display = 'none';
+	}
+
+
+	for (var j = 0; j < aSpan.length; j++) {
+		aSpan[j].index = j;
+		aSpan[j].onclick = function() {
+			for (var i = 0; i < aSpan.length; i++) {
+				aSpan[i].className = '';
+				aDiv[i].style.display = 'none';
+			}
+			this.className = 'select';
+			aDiv[this.index].style.display = 'block';
+		}
+	}
+
+	searchBtn.onclick = function() {
+		var originalText = newText.replace(/(<span class="(search||replace)Text">)||(<\/span>)/g, '');
+		oP.innerHTML = originalText;
+		var searchText = searchInput.value,
+			arr = [];
+		if (!searchText) {
+			alert('请输入查找的字符');
+			return;
+		}
+		var result = originalText.indexOf(searchText);
+		if (result == -1) {
+			alert('没有找到您输入的字符');
+		} else {
+			arr = originalText.split(searchText);
+			newText = arr.join('<span class="searchText">' + searchText +'</span>');
+			oP.innerHTML = newText;
+		}
+		searchInput.value = '';
+	}
+
+
+
+	//不用replaece的方法再写
+	replaceBtn.onclick = function() {
+		var originalText = newText.replace(/(<span class="(search||replace)Text">)||(<\/span>)/g, '');
+		oP.innerHTML = originalText;
+		var searchText = aReplaceInput[0].value,
+			replaceText = aReplaceInput[1].value;
+		if (aReplaceInput[0].value == '' || aReplaceInput[1].value == '') {
+			alert('请输入要替换的字符');
+			return;
+		}
+		var regexp = new RegExp(searchText, 'g');
+		newText = originalText.replace(regexp, '<span class="replaceText">'+replaceText+'</span>');
+		oP.innerHTML = newText;
+		for (var j = 0; j < aReplaceInput.length; j++) {
+			aReplaceInput[j].value = '';
+		}
+	}
+
+
+	</script>
+</body>
+</html>
