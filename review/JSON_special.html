@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JSON</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var json = 123
+
+		var jsonText = JSON.parse(json, function(key, value){
+		  if (key == '') {
+		    return "Hello";
+		  }
+		});
+
+		console.log(typeof jsonText)
+		consoe.log(jsonText);
+	</script>
+</body>
+</html>
