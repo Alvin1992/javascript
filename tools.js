@@ -1,9 +1,22 @@
 function $(selector, context) {
 	var firstChar = selector.charAt(0);
-	if (firstChar === '#') {
+	context = context || document;
+	if (firstChar == '#') {
 		return document.getElementById(selector.slice(1));
+	} else if (firstChar == '.') {
+		var arr = [];
+		var elem = context.getElementsByTagName('*');
+		for (var i = 0; i < elem.length; i++) {
+			var classnameArr = elem[i].className.split(' ');
+			for (var j = 0; j < classnameArr.length; j++) {
+				if (classnameArr[j] == selector.slice(1)) {
+					arr.push(elem[i]);
+					break;
+				}
+			};
+		};
+		return arr;
 	} else {
-		context = context || document;
 		return context.getElementsByTagName(selector);
 	}
 }
