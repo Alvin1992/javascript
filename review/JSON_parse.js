@@ -1,4 +1,4 @@
-//返回函数
+//还原函数
 
 var book = {
 	"title": "Professional Javascipt",
