@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>change order</title>
+	<style type="text/css">
+	div {
+		width: 50px;
+		height: 50px;
+		background-color: red;
+		margin-right: 10px;
+		display: inline-block;
+		text-align: center;
+		line-height: 50px;
+	}
+	</style>
+</head>
+<body>
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+	<button>添加在前面</button>
+	<button>添加在后面</button>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	var aDiv = $('div'),
+		aBtn = $('button'),
+		arr = [1,2,3,4,5];
+
+	aBtn[0].onclick = function() {
+		var last = arr.pop();
+		arr.unshift(last);
+		addContent(aDiv, arr);
+	}
+
+	aBtn[1].onclick = function() {
+		var first = arr.shift();
+		arr.push(first);
+		addContent(aDiv, arr);
+	}
+
+	function addContent(obj, arr) {
+		for (var i = 0; i < obj.length; i++) {
+			obj[i].innerHTML = arr[i];
+		}
+	}
+	</script>
+</body>
+</html>
