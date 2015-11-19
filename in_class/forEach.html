@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>forEach</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function forEach(arr, callback) {
+		for (var i = 0; i < arr.length; i++) {
+			callback(i, arr[i]);
+		}
+	}
+
+	var arr = ["a","f","rt","fg","de","ui","ol","dnm","lat"];
+	var result = forEach(arr, function(a,b) {
+		console.log(a, b);
+	});
+	</script>
+</body>
+</html>
