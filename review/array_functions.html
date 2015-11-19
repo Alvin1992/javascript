@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>functions of array</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var arr =[1, 2, 3 ,4, 'a', 'b', 'rt'];
+
+	var len = arr.length;
+	console.log(len);
+
+	arr.length = 10;
+	console.log(arr[8]); //虽然有值，但是未定义
+	console.log(arr[100]); //没有此项
+
+	arr.length = 4;
+	console.log(arr);
+
+
+	var arr1 = [1,2,3,15,7,9];
+
+	arr1.sort(); //默认按字符编码顺序
+	console.log(arr1);
+
+	//比较函数
+	//如果两个数相减的值小于等于0 那么不交换位置
+	// 如果大于零，数组的中的两个数交换位置
+	var arr2 = [1,2,15,24,9,6];
+	arr2.sort(function(a, b) {
+		return a - b;
+	});
+	console.log(arr2);
+
+	//当字符串和数字混合时
+	//先把字符串的首字母转成数字
+
+	var arr3 = ['1', 2, 'a', '9', 15, 19, 43, 115, 'ui'];
+	arr3.sort(function(a, b) {
+		if (typeof a !== 'number') {
+			a = a.charCodeAt();
+		}
+		if (typeof b !== 'number') {
+			b = b.charCodeAt();
+		}
+		return a - b;
+	});
+
+	console.log(arr3);
+
+	var arr4 = [1,2,3,4];
+	var returnValue = arr4.push(8, 9, 0);
+	console.log(arr4);
+	console.log(returnValue);  //返回数组的长度
+
+	var dele = arr4.pop();
+	console.log(arr4);
+	console.log(dele);  //返回删除的值
+
+	var add = arr4.unshift('a', 't');
+	console.log(arr4);
+	console.log(add);  //返回数组的长度
+
+
+	var dele1 = arr4.shift();
+	console.log(arr4);
+	console.log(dele1);  //返回删除的值
+
+
+	var arr5 = [1,2,3,4,56,7,8,9];
+	var result = arr5.slice(1,5);
+	console.log(arr5);
+	console.log(result);  //返回截取的长度，是个数组
+
+
+	//删除，替换，添加
+	//删除
+	var arr6 = ['1234', 'errtyh', 12345, 564, 895, 'cvb'];
+	var deleItem = arr6.splice();  //没删除一个
+	console.log('arr6: ',arr6);
+	console.log(deleItem);
+
+	var deleItem1 = arr6.splice(4);
+	console.log('arr6: ',arr6);
+	console.log(deleItem1);   //返回删除项组成的集合
+
+
+	var deleItem2 = arr6.splice(2,1);  //第二个参数决定删除的项数
+	console.log('arr6: ', arr6);
+
+	//替换
+	var arr7 = ['1234', 'errtyh', 12345, 564, 895, 'cvb'];
+	var deleItem3 = arr7.splice(2,3, 'a', 'b', 'c');
+	console.log('arr7: ',arr7);
+	console.log(deleItem3);   //返回删除项组成的集合
+
+
+	//添加
+
+	var arr8 = ["1234", "errtyh", "a", "b", "c", "cvb"];
+	var addFourItem = arr8.splice(2,0,1,2,3,4);
+	console.log(arr8);
+
+
+	//连接
+	var arr9 = ["1234", "errtyh", 1, 2, 3, 4, "a", "b", "c", "cvb"];
+	var addItem = arr9.concat('1','2','3');
+	console.log('arr9: ', arr9);
+	console.log(addItem);
+
+	var addItem1 = arr9.concat([1,2,3]);
+	console.log('arr9: ', arr9);
+	console.log(addItem1);
+
+	var addNothin = arr9.concat();
+	console.log('arr9: ', arr9);
+	console.log(addNothin);
+
+	var numericalDimension = [[[[[[[[[5]]]]]]]]];
+	var resultConcat = arr9.concat(numericalDimension, arr8);
+	console.log(resultConcat); //只能去掉一层
+
+
+	var arr10 = [1,2,3,4,5];
+	var resultReverse = arr10.reverse();
+	console.log(arr10);
+	console.log(resultReverse);
+
+
+	</script>
+</body>
+</html>
