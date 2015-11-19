@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		/*var arr =[];
+		for (var i = 0; i < 100; i++) {
+			arr.push(i);
+		}
+		var sortedArr = arr.sort(function() {
+			return Math.random() - 0.5;
+		});
+
+		sortedArr.length = 10;
+		console.log(sortedArr);*/
+
+
+		var obj = {};
+		var resultArr = [];
+		while (resultArr.length < 10) {
+			var randNum = Math.floor(Math.random()*100);
+			if (!obj[randNum]) {
+				resultArr.push(randNum);
+				obj[randNum] = true;
+			}
+		}
+
+		console.log(resultArr);
+	</script>
+</body>
+</html>
