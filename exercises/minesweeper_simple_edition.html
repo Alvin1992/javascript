@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>the simple edition of minesweeper</title>
+	<style type="text/css">
+	div {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {text-align: center;}
+
+	input {
+		width: 200px;
+		height: 25px;
+	}
+
+	.container {
+		width: 600px;
+		margin: 20px auto;
+		position: relative;
+	}
+
+	.container div {
+		width: 48px;
+		height: 48px;
+		position: absolute;
+		line-height: 48px;
+		border: 1px solid yellow;
+		background-color: red;
+		cursor: pointer;
+	}
+
+	.bomb {
+		background-color: black !important;
+	}
+
+	.success {
+		background-color: green !important;
+	}
+
+	</style>
+</head>
+<body>
+	<input type="text" value="你敢挑战几个雷">
+	<div class="container"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	var str = '',
+		oDiv = $('.container')[0],
+		aDiv = $('div', oDiv),
+		oInput = $('input')[0];
+	for (var i = 0; i < 100; i++) {
+		str += '<div style="top:'+ Math.floor(i/10)*50 +'px;left:'+ (i%10)*50 +'px;"></div>';
+	}
+	oDiv.innerHTML = str;
+
+	oInput.onfocus = function() {
+		if (this.value == '你敢挑战几个雷') {
+			this.value = '';
+		}
+	}
+
+	oInput.onblur = function() {
+		var num = parseInt(this.value);
+		if (!num || Math.abs(num) > 100) {
+			num = 10;
+			this.value = 10;
+		} else {
+			num = Math.abs(num);
+			this.value = num;
+		}
+		minesweeper(num);
+	}
+
+	function minesweeper(num) {
+		var bombArr = [],
+			obj = {};
+		for (var i = 0; i < aDiv.length; i++) {
+			aDiv[i].className = '';
+			aDiv[i].innerHTML = '';
+		};
+		while (bombArr.length < num) {
+			var rand = Math.floor(Math.random()*100);
+			if (!obj[rand]) {
+				bombArr.push(rand);
+				obj[rand] = true;
+			}
+		}
+		for (var i = 0; i < bombArr.length; i++) {
+			aDiv[bombArr[i]].innerHTML = 'bomb';
+		};
+
+		for (var i = 0; i < aDiv.length; i++) {
+			aDiv[i].index = i;
+			aDiv[i].onclick = function() {
+				var x = this.index;
+				if (bombArr.some(function(item) {return item == x})) {
+					for (var i = 0; i < bombArr.length; i++) {
+						aDiv[bombArr[i]].className = 'bomb';
+					};
+					alert('你被炸死了');
+					minesweeper(num);
+				} else {
+					this.className = 'success';
+				}
+
+				var noBomb = $('.success');
+				if (noBomb.length == aDiv.length - bombArr.length) {
+					console.log(123)
+					alert('Congratulations');
+					minesweeper(num);
+				}
+			}
+		}
+	}
+
+	</script>
+</body>
+</html>
