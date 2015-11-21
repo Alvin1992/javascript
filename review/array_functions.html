@@ -127,7 +127,14 @@
 	console.log(arr10);
 	console.log(resultReverse);
 
+	//数组的迭代方法不会修改原数组，但是传递给这些方法的函数可以修改数组
+	var arrTest = [1,2,3,45,6];
+	var resultTest = arrTest.map(function(e, i, a) {
+		return a[i] += 5;
+	})
 
+	console.log(arrTest);
+	console.log(resultTest);
 	</script>
 </body>
 </html>
