@@ -104,7 +104,37 @@ function addZero(num) {
 	return num < 10 ? '0' + num : num;
 }
 
+function forEach(arr, callback) {
+	if (Array.prototype.forEach) {
+		arr.forEach(callback);
+	} else {
+		for (var i = 0; i < arr.length; i++) {
+			callback(i, arr[i]);
+		}
+	}
+}
 
+function indexOf(arr, searchValue, searchIndex, bool) {
+	var result = [];
+	if (arguments.length == 0 || arguments.length == 1) {return -1};
+	searchIndex = searchIndex || 0;
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] === searchValue) {
+			result.push(i);
+		}
+	}
+	switch (true) {
+		case result.length == 0:
+			return -1;
+			break;
+		case bool:
+			return result;
+			break;
+		case !bool:
+			return result[0];
+			break;
+	}
+}
 
 
 
