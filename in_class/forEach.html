@@ -7,8 +7,13 @@
 <body>
 	<script type="text/javascript">
 	function forEach(arr, callback) {
-		for (var i = 0; i < arr.length; i++) {
-			callback(i, arr[i]);
+		if (Array.prototype.forEach) {
+			console.log(123)
+			arr.forEach(callback);
+		} else {
+			for (var i = 0; i < arr.length; i++) {
+				callback(i, arr[i]);
+			}
 		}
 	}
 
