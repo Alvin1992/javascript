@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>reorder</title>
+	<style type="text/css">
+	section, div, ul, li, p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		width: 840px;
+		margin: 10px auto;
+		background-color: #ccc;
+		text-align: center;
+		padding: 0 0 10px 10px;
+	}
+
+	.container .content {
+		*zoom: 1;
+	}
+
+	.container .content:after {
+		content: '';
+		display: block;
+		height: 0;
+		clear: both;
+	}
+
+	.container .content li {
+		width: 200px;
+		height: 200px;
+		list-style-type: none;
+		float: left;
+		margin-right: 10px;
+	}
+
+	.container .content li div {
+		background-color: blue;
+		color: #fff;
+		height: 150px;
+		font-size: 30px;
+		line-height: 150px;
+	}
+
+	.container .content li p {
+		background-color: #333;
+		color: #999;
+		height: 50px;
+		font-size: 16px;
+		line-height: 50px;
+	}
+	</style>
+</head>
+<body>
+	<section class="container">
+		<div class="control">
+			<button id="order">从大到小</button>
+			<button id="disorder">打乱顺序</button>
+		</div>
+		<ul class="content">
+			<li>
+				<div>for</div>
+				<p><span>1-</span><span>for</span></p>
+			</li>
+			<li>
+				<div>dust</div>
+				<p><span>2-</span><span>dust</span></p>
+			</li>
+			<li>
+				<div>I</div>
+				<p><span>3-</span><span>I</span></p>
+			</li>
+			<li>
+				<div>am</div>
+				<p><span>4-</span><span>am</span></p>
+			</li>
+			<li>
+				<div>to</div>
+				<p><span>5-</span><span>to</span></p>
+			</li>
+			<li>
+				<div>dust</div>
+				<p><span>6-</span><span>dust</span></p>
+			</li>
+			<li>
+				<div>I</div>
+				<p><span>7-</span><span>I</span></p>
+			</li>
+			<li>
+				<div>will</div>
+				<p><span>8-</span><span>will</span></p>
+			</li>
+		</ul>
+	</section>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+
+	var arrText = ['for', 'dust', 'I', 'am', 'to', 'dust', 'I', 'will'],
+		arrCaptionNum = ['1-', '2-', '3-', '4-', '5-', '6-', '7-', '8-'],
+		order = $('#order'),
+		disorder = $('#disorder'),
+		aLi = $('li'),
+		onOff = false;
+
+
+		order.onclick = function() {
+			makeTheListBeOrder(aLi, onOff);
+			onOff = !onOff;
+		}
+
+		disorder.onclick = function() {
+			arrText.sort(function() {return Math.random() - 0.5});
+			doTheSameThing(aLi, false);
+		}
+
+		function makeTheListBeOrder(obj, bool) {
+			order.innerHTML = bool ? '从大到小' : '从小到大';
+			arrText.reverse();
+			arrCaptionNum.reverse();
+			doTheSameThing(obj, true);
+		}
+
+		function doTheSameThing(aLi, bool) {
+			for (var i = 0; i < aLi.length; i++) {
+				var oDiv = $('div', aLi[i])[0],
+					aSpan = $('span', aLi[i]);
+				oDiv.innerHTML = arrText[i];
+				aSpan[1].innerHTML = arrText[i];
+				bool && (aSpan[0].innerHTML = arrCaptionNum[i]);
+			};
+		}
+
+
+	</script>
+</body>
+</html>
