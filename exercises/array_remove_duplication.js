@@ -37,18 +37,15 @@ console.log(unique1(array1));
 
 
 //对象法
-//注意：判断是否为js对象的键时，会自动调用toString()，不同的键可能被认为一样，所以还得用indexOf
+//注意：判断是否为js对象的键时，会自动调用toString()，不同的键可能被认为一样
+//所以可以同时保存一下数据类型
 function unique2(array) {
-	var arr = [], obj = {}, val, type;
+	var arr = [], obj = {}, val;
 	for (var i = 0; i < array.length; i++) {
-		val = array[i];
-		type = typeof val;
+		val = (typeof array[i]) + array[i];
 		if (!obj[val]) {
-			obj[val] = [type];
-			arr.push(val);
-		} else if (obj[val].indexOf(type) < 0) {
-			obj[val].push(type);
-			arr.push(val);
+			obj[val] = true;
+			arr.push(array[i]);
 		}
 	}
 	return arr;
