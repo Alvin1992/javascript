@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bubble sort</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function bubblesort(array) {
+		var mediate, onOff = true;
+		for (var i = 0, l = array.length; i < l; i++) {
+			for (var j = l - 1; j > i; j--) {
+				if (array[j] < array[j-1]) {
+					mediate = array[j];
+					array[j] = array[j-1];
+					array[j-1] = mediate;
+					onOff = false;
+				}
+			}
+			if (onOff) {break};
+		}
+		return array;
+	}
+
+	var arr = [1,4,2,5,9,54,35,23,67,98,123,546];
+	console.log(bubblesort(arr));
+	</script>
+</body>
+</html>
