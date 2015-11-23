@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>quicksort</title>
+</head>
+<body>
+	<script type="text/javascript">
+	function quicksort(array) {
+		if (array.length <= 1) {return array};
+		var left = [], right = [];
+		var num = array.splice(0,1)[0];
+		for (var i = 0; i < array.length; i++) {
+			if (num < array[i]) {
+				right.push(array[i])
+			} else {
+				left.push(array[i]);
+			}
+		}
+		return quicksort(left).concat(num, quicksort(right));
+	}
+	var arr = [1,24,235,43,785,345,26,56];
+	console.log(quicksort(arr));
+	</script>
+</body>
+</html>
