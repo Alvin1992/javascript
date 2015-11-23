@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>array remove duplicate item</title>
+</head>
+<body>
+	<script type="text/javascript">
+	//让有重复数组和新数组比较
+	function unique(array) {
+		var arr = [array[0]];
+		for (var i = 1, l = array.length; i < l; i++) {
+			onOff = true;
+			for (var j = 0, k = arr.length; j < k; j++) {
+				if (array[i] === arr[k]) {
+					onOff = false;
+					break;
+				}
+			}
+			if(onOff) {
+				arr.push(array[i]);
+			}
+		}
+		return arr;
+	}
+
+	var arr = [1,2,3,'1','2','4',5];
+	var result = unique(arr);
+	console.log(result);
+	</script>
+</body>
+</html>

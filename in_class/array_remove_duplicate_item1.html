@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>array remove duplicate item</title>
+</head>
+<body>
+	<script type="text/javascript">
+
+	function unique(array) {
+		var arr = [],
+			obj = {};
+		for (var i = 0; i < array.length; i++) {
+			var value = (typeof array[i]) + array[i];
+			if (!obj[value]) {
+				obj[value] = value;
+				arr.push(array[i]);
+			}
+		}
+		return arr;
+	}
+
+	var arr = [1,2,3,'1','2','4',5];
+	var result = unique(arr);
+	console.log(result);
+	</script>
+</body>
+</html>
