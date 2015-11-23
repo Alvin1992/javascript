@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>exchange value</title>
+</head>
+<body>
+	<script type="text/javascript">
+	var a = 5,
+		b = 10;
+
+	//normal way, define a mediate variable
+	/*var mediate;
+	mediate = a;
+	a = b;
+	b = mediate;
+	console.log(a,b);*/
+
+	//use array
+	var a = [b, b=a][0];
+	console.log(a, b);
+	</script>
+</body>
+</html>
