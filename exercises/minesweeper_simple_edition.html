@@ -60,7 +60,7 @@
 		if (this.value == '你敢挑战几个雷') {
 			this.value = '';
 		}
-	}
+	};
 
 	oInput.onblur = function() {
 		var num = parseInt(this.value);
@@ -72,7 +72,7 @@
 			this.value = num;
 		}
 		minesweeper(num);
-	}
+	};
 
 	function minesweeper(num) {
 		var bombArr = [],
@@ -107,11 +107,11 @@
 				}
 
 				var noBomb = $('.success');
-				if (noBomb.length == aDiv.length - bombArr.length) {
+				if (noBomb.length && noBomb.length == aDiv.length - bombArr.length) {
 					alert('Congratulations');
 					minesweeper(num);
 				}
-			}
+			};
 		}
 	}
 
