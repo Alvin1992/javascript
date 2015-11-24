@@ -51,7 +51,7 @@ function doMove(obj, attr, speed, target, fn) {
 
 			clearInterval(obj.timer);
 
-			fn && fn();
+			typeof fn == 'function' && fn();
 		} else {
 			obj.style[attr] = cur + 'px';
 		}
