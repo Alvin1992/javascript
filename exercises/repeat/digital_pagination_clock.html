@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin:0px;
+				padding:0px;
+			}
+			body{
+				background: #232323; color: #fff; font-family: "微软雅黑"}
+			img{
+				width: 150px;
+				height: 210px;
+				border: none;
+				vertical-align: top;
+			}
+			.box{
+				width: 1200px;
+				height: 210px;
+				margin: 100px auto;
+			}
+			ul li{
+				list-style: none;
+				vertical-align: top;
+				width: 150px;
+				height: 210px;
+				overflow: hidden;
+				float: left;
+				position: relative;
+			}
+			ul li p{
+				width: 150px;
+				height: 420px;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+<script type="text/javascript">
+</script>
+	</head>
+	<body>
+		<div class="box">
+			<ul id="list">
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/c.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/c.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+				<li>
+					<p>
+						<img src="../../img/0.png"/>
+						<img src="../../img/0.png"/>
+					</p>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="../../tools.js"></script>
+		<script type="text/javascript">
+			function getTime() {
+				var date = new Date(),
+					hours = date.getHours(),
+					mins = date.getMinutes(),
+					seconds = date.getSeconds(),
+					str ='';
+
+				str = addZero(hours) + ':' + addZero(mins) + ':' + addZero(seconds);
+				return str;
+			}
+
+
+			function clock(obj) {
+				var curTime = getTime();
+				for (var i = 0; i < obj.length; i++) {
+					(function(m) {
+						var oImg = $('img', obj[m])[0];
+						if (curTime[m] == ':') {
+							oImg.src = '../../img/c.png';
+							setTimeout(function() {
+								oImg.src = '../../img/nc.png';
+							}, 500);
+						} else {
+							if (curTime[m] !== preTime[m]) {
+								changePic(obj[m], curTime[m]);
+							}
+						}
+					})(i);
+				}
+				preTime = curTime;
+			}
+
+			function changePic(obj, str) {
+				var aImg = $('img', obj);
+				aImg[1].src = '../../img/' + str + '.png';
+				doMove(obj, 'top', 10, -210, function() {
+					setTimeout(function() {
+						obj.style.top = 0;
+					}, 0);
+					aImg[0].src = '../../img/' + str + '.png';
+				});
+			}
+
+
+			var preTime = '',
+				aP = $('p');
+
+			setInterval(function() {
+				clock(aP);
+			}, 1000);
+
+
+		</script>
+	</body>
+</html>

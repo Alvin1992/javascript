@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>doMove 函数封装</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		left: 50px;
+		top: 50px;
+		background-color: red;
+	}
+	</style>
+</head>
+<body>
+	<button>向右</button><button>向左</button>
+	<div id="test"></div>
+	<script type="text/javascript">
+	function getStyle(obj, attr) {
+		if (obj.currentStyle) {
+			return obj.currentStyle[attr];
+		} else {
+			return getComputedStyle(obj)[attr];
+		}
+	}
+	function doMove(obj, attr, speed, target, callBack) {
+		clearInterval(obj.timer);
+		var cur = parseInt(getStyle(obj, attr));
+		speed = cur > target ? -Math.abs(speed) : speed;
+		obj.timer = setInterval(function() {
+			cur += speed;
+			if (Math.abs(target - cur) <= Math.abs(speed)) {
+				cur = target;
+				obj.style[attr] = cur + 'px';
+				clearInterval(obj.timer);
+				typeof callBack == 'function' && callBack();
+			} else {
+				obj.style[attr] = cur + 'px';
+			}
+		}, 30);
+	}
+
+	var aBtn = document.getElementsByTagName('button'),
+		oDiv = document.getElementById('test');
+
+
+		aBtn[0].onclick = function() {
+			doMove(oDiv, 'left', 7 ,500);
+		}
+
+		aBtn[1].onclick = function() {
+			doMove(oDiv, 'left', 7, 50);
+		}
+
+
+
+
+
+	</script>
+</body>
+</html>

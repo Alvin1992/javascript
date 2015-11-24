@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>doMove 函数封装</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		position: absolute;
+		left: 700px;
+		top: 50px;
+		background-color: red;
+	}
+	</style>
+</head>
+<body>
+	<button>开始运动</button>
+	<div id="test"></div>
+	<script type="text/javascript">
+	function getStyle(obj, attr) {
+		if (obj.currentStyle) {
+			return obj.currentStyle[attr];
+		} else {
+			return getComputedStyle(obj)[attr];
+		}
+	}
+	var oDiv = document.getElementById('test'),
+		oBtn = document.getElementsByTagName('button')[0];
+	oBtn.onclick = function() {
+		clearInterval(oDiv.timer);
+		oDiv.timer = setInterval(function() {
+			var cur = parseInt(getStyle(oDiv, 'left'));
+			console.log(cur)
+			cur -= 7;
+			if (cur < 50) {
+				cur = 50;
+				clearInterval(oDiv.timer);
+			}
+			oDiv.style.left = cur + 'px';
+		},30);
+	};
+	</script>
+</body>
+</html>

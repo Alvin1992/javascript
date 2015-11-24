@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select all</title>
+	<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+	}
+
+	.wrap {
+		width: 300px;
+		margin: 20px auto;
+	}
+
+	li {
+		list-style-type: none;
+		width: 200px;
+		height: 30px;
+		line-height: 30px;
+	}
+
+	li:nth-child(2n) {
+		background-color: #40FE0E;
+	}
+
+	li:nth-child(2n+1) {
+		background-color: #FE3CFC;
+	}
+
+	li:hover {
+		background-color: #666;
+	}
+
+	input {
+		margin-right: 10px;
+	}
+
+	.select {
+		background-color: #666 !important;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<ul id="container">
+			<li><input type="checkbox" name="song">私奔</li>
+			<li><input type="checkbox" name="song">北京北京</li>
+			<li><input type="checkbox" name="song">我爱你中国</li>
+			<li><input type="checkbox" name="song">花火</li>
+			<li><input type="checkbox" name="song">回来</li>
+			<li><input type="checkbox" name="song">爱要有你才完整</li>
+		</ul>
+		<p><input id="select-all" type="checkbox" name="song">全选</p>
+	</div>
+	<script type="text/javascript" src="../../tools.js"></script>
+	<script type="text/javascript">
+	var box = $('#container'),
+		aInput = $('input', box),
+		aLi = $('li', box),
+		all = $('#select-all');
+
+
+	for (var i = 0; i < aInput.length; i++) {
+		aInput[i].index = i;
+		aInput[i].onclick = function() {
+			var count = 0;
+			aLi[this.index].className = this.checked ? 'select' : '';
+			for (var i = 0; i < aInput.length; i++) {
+				if (aInput[i].checked) {
+					count++;
+				}
+			}
+
+			all.checked = count == 6 ? true : false;
+		};
+	}
+
+	all.onclick = function() {
+		switchStatus(this.checked);
+	};
+
+
+	function switchStatus(bool) {
+		for (var i = 0; i < aInput.length; i++) {
+			aInput[i].checked = bool ? true : false;
+			aLi[i].className = bool ? 'select' : '';
+		}
+	}
+
+
+	</script>
+</body>
+</html>
