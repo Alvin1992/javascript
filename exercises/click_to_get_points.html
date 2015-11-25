@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>game!</title>
+	<style type="text/css">
+	body, section, h2, p, div {
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		background-color: #F1F1F1;
+	}
+
+	.note, .box {
+		width: 800px;
+		margin: 10px auto;
+	}
+
+	.note {
+		text-align: center;
+	}
+
+	.note p {
+		margin: 10px 0;
+	}
+
+	.box {
+		position: relative;
+		border: 1px solid black;
+		height: 500px;
+	}
+
+	.box .windows {
+		position: relative;
+	}
+
+	.box .windows p {
+		position: absolute;
+		top: -9999px;
+		left: -9999px;
+		width: 48px;
+		height: 48px;
+	}
+
+	.box .info {
+		position: absolute;
+		width: 129px;
+		height: 80px;
+		padding: 10px;
+		left: -151px;
+		top: -1px;
+		border: 1px solid black;
+		border-right: none;
+		background-color: #FFFFCC;
+		line-height: 40px;
+	}
+	</style>
+</head>
+<body>
+	<section class="note">
+		<h2>你的鼠标有多快</h2>
+		<p>游戏说明：点击“开始游戏”，随机掉下QQ表情，点中它，千万别让它掉下去！！</p>
+		<button id="begain">开始</button><button id="stop">死活不想玩了</button>
+	</section>
+	<section class="box">
+		<div class="windows">
+			<p id="move"><img src="../img/game/1.gif" height="48" width="48"></p>
+		</div>
+		<div class="info">
+			<p>得分：<span>0</span>分</p>
+			<p>失分：<span>0</span>分</p>
+		</div>
+	</section>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+	function doMove(obj, attr, speed, target, fn) {
+
+		clearInterval(obj.timer);
+
+		var cur = parseFloat(getStyle(obj, attr));
+
+		speed = cur > target ? -Math.abs(speed) : speed;
+
+		obj.timer = setInterval(function() {
+
+			if(stop.disabled) {movedElement.style.top = '-9999px'; return;};
+
+			cur += speed;
+			//条件speed > 0 && cur >= target || speed < 0 && cur <= target也可以判断
+			if (Math.abs(cur - target) <= Math.abs(speed)) {
+
+				cur = target;
+
+				obj.style[attr] = cur + 'px';
+
+				clearInterval(obj.timer);
+
+				fn && fn();
+			} else {
+				obj.style[attr] = cur + 'px';
+			}
+
+		}, 30);
+	}
+
+		var begain = $('#begain'),
+			movedElement = $('#move'),
+			pic = $('img', movedElement)[0],
+			aSpan = $('span'),
+			box = $('.box')[0],
+			onOff = true,
+			stop = $('#stop');
+
+		begain.onclick = function() {
+			begain.innerHTML =  '暂停';
+			!onOff && (alert('点出确定继续游戏！', onOff = true));
+			onOff = false;
+			stop.disabled = false;
+			generateET();
+		};
+
+		movedElement.onmousedown = function() {
+			clearInterval(this.timer);
+			this.timer = null;
+			pic.src = "../img/game/fail.gif";
+			aSpan[0].innerHTML = ++aSpan[0].innerHTML;
+			shake(this, 'left', 30, generateET);
+		};
+
+		stop.onclick = function() {
+			this.disabled = true;
+			begain.innerHTML = '开始';
+			onOff = true;
+		}
+
+		function generateET() {
+			movedElement.style.top = 0;
+			var randomPos = Math.round(Math.random() * 704) + 48;
+			pic.src = "../img/game/" + (randomPos%15 + 1) + ".gif";
+			movedElement.style.left = randomPos + 'px';
+			doMove(movedElement, 'top', 10, 452, function() {
+				aSpan[1].innerHTML = ++aSpan[1].innerHTML;
+				shake(box, 'left', 30, generateET);
+			});
+		}
+
+
+	</script>
+</body>
+</html>
