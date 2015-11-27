@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM get nodes</title>
+</head>
+<body>
+	<div id="container">
+		<p>我是ul的上一个兄弟元素</p>
+		<ul id="box">
+			<li>这是第1个项目</li>
+			<li>这是第2个项目</li>
+			<li>这是第3个项目</li>
+		</ul>
+		<p>我是ul的下一个兄弟元素</p>
+	</div>
+<script type="text/javascript">
+	//console.dir(document);
+
+	var container = document.getElementById('container');
+	console.log(container.nodeType);
+
+	var aLi = document.getElementsByTagName('li');
+	var childNodes = aLi[0].childNodes;
+	console.log(childNodes.length);
+	console.log(childNodes[0].nodeValue);
+
+	var oUl = document.getElementById('box');
+	var childList = oUl.children;
+	console.log('The length of childList: ' + childList.length);
+	console.log(childList);
+
+	console.log(childList[0].parentNode.parentNode.parentNode.parentNode);
+
+	var first = oUl.firstChild;
+	console.log(first);
+	var firstElem = oUl.firstElementChild;
+	console.log(firstElem);
+	//兼容
+	var first = oUl.firstElementChild || oUl.firstChild;
+
+	var last = oUl.lastChild;
+	console.log(last);
+	var lastElem = oUl.lastElementChild;
+	console.log(lastElem);
+	//兼容
+	var last = oUl.lastElementChild || oUl.lastChild;
+
+
+	var nextSibling = oUl.nextSibling;
+	console.log(nextSibling);
+	var nextElemSibling = oUl.nextElementSibling;
+	console.log(nextElemSibling);
+	//兼容
+	var nextSibling = oUl.nextElementSibling || oUl.nextSibling;
+
+	var previousSibling = oUl.previousSibling;
+	console.log(previousSibling);
+	var previousElemSibling = oUl.previousElementSibling;
+	console.log(previousElemSibling);
+	//兼容
+	var previousSibling = oUl.previousElementSibling || oUl.previousSibling;
+
+	//需要判断，因为没找到会返回null，然后会执行previousSibling
+	var noSibling = container.previousElementSibling || container.previousSibling;
+	console.log(noSibling);
+
+	function pre(element) {
+		var pre = element.previousElementSibling || element.previousSibling;
+		if (!pre || pre.nodeType !== 1) {
+			return null;
+		} else {
+			return pre;
+		}
+	}
+
+</script>
+</body>
+</html>
