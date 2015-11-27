@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>无标题文档</title>
+<style>
+body,ul,p{margin:0;padding:0;}
+img{display:none;float:left;}
+#box{width:314px;height:148px;margin:30px auto;font-family:Arial, Helvetica, sans-serif;}
+#list2{display:none;}
+#box div{width:292px;height:104px;border:1px solid #c6c6c6;padding:10px 0 0 10px; }
+#top{height:30px;}
+span{display:block;width:80px;height:30px;border:1px solid #c6c6c6;float:left;font-size:14px;line-height:30px;text-align:center;color:#737373;border-bottom:none;}
+.show{width:80px;height:30px;border:1px solid #c6c6c6;border-bottom:none;color:#000;background:#ccc;}
+ul {float:left;width:170px;height:96px;}
+li{width:170px;height:31px;font-size:12px;line-height:30px;margin:0 0 1px 1px;background:#dee7e7;list-style:none;}
+li a{text-decoration:none;color:#8c9191;padding-left:7px;}
+.active{background:#636363;display:block;}
+.active a{color:#fff;}
+.show1{display: block;}
+.hide{display: none;}
+</style>
+<script src='./tools.js'></script>
+</head>
+
+<body>
+<div id="box">
+	<p id="top">
+		<span class="show">专题</span>
+		<span>视频</span>
+		<span>视频1</span>
+	</p>
+	<div class="show1 oDiv" id="bottom">
+		<img class="active"  src="../img/list1.jpg" alt="" />
+		<img src="../img/list2.jpg" alt="" />
+		<img src="../img/list1.jpg" alt="" />
+		<ul>
+			<li class="active" ><a href="#">奇虎360纽交所上市11</a></li>
+			<li><a href="#">2011年IT领袖峰会</a></li>
+			<li><a href="#">CCBN召开 助三网融合</a></li>
+		</ul>
+	</div>
+	<div class="hide oDiv" id="bottom1">
+		<img src="../img/list2.jpg" alt="" class="active" />
+		<img src="../img/list1.jpg" alt="" />
+		<img src="../img/list2.jpg" alt="" />
+		<ul>
+			<li class="active" ><a href="#">奇虎360纽交所上市22</a></li>
+			<li><a href="#">2011年IT领袖峰会</a></li>
+			<li><a href="#">CCBN召开 助三网融合</a></li>
+		</ul>
+	</div>
+	<div class="hide oDiv" id="">
+		<img src="../img/list2.jpg" alt="" class="active" />
+		<img src="../img/list1.jpg" alt="" />
+		<img src="../img/list2.jpg" alt="" />
+		<ul>
+			<li class="active" ><a href="#">奇虎360纽交所上市33</a></li>
+			<li><a href="#">2011年IT领袖峰会</a></li>
+			<li><a href="#">CCBN召开 助三网融合</a></li>
+		</ul>
+	</div>
+</div>
+<script type="text/javascript" src="../tools.js"></script>
+<script type="text/javascript">
+	var aSpan = $('span', $('#box')),
+		aDiv = $('div', $('#box')),
+		groupIndex = 0,
+		itemIndex = 0;
+
+	autoSwitchGroup();
+
+	function autoSwitchGroup() {
+		groupIndex %= aSpan.length;
+		aSpan[groupIndex].timer = setInterval(function() {
+			for (var i = 0; i < aSpan.length; i++) {
+				aSpan[i].className = '';
+				aDiv[i].className = 'hide';
+			}
+			aSpan[groupIndex].className = 'show';
+			aDiv[groupIndex].className = 'show1';
+			var aLi = $('li', aDiv[groupIndex]),
+				aImg = $('img', aDiv[groupIndex]);
+
+			for (var j = 0; j < aLi.length; j++) {
+				aLi[j].className = '';
+				aImg[j].className = '';
+			}
+			aImg[itemIndex].className = 'active';
+			aLi[itemIndex].className = 'active';
+			itemIndex++;
+			if (itemIndex % aLi.length == 0) {
+				clearInterval(aSpan[groupIndex].timer);
+				groupIndex++;
+				itemIndex = 0;
+				autoSwitchGroup();
+			}
+		}, 1000);
+	}
+
+	for (var i = 0; i < aSpan.length; i++) {
+		switchGroup(i);
+	}
+
+	function switchGroup(n) {
+		var aLi = $('li', aDiv[n]),
+			aImg = $('img', aDiv[n]);
+
+		aSpan[n].onmouseover = function() {
+			clearInterval(aSpan[groupIndex].timer);
+			if (this.className != 'show') {
+				itemIndex = 0;
+				groupIndex = n;
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].className = '';
+					aImg[i].className = '';
+				}
+				aLi[itemIndex].className = 'active';
+				aImg[itemIndex].className = 'active';
+			}
+			for (var j = 0; j < aSpan.length; j++) {
+				aSpan[j].className = '';
+				aDiv[j].className = 'hide';
+			}
+			aSpan[n].className = 'show';
+			aDiv[n].className = 'show1';
+		};
+
+		aSpan[n].onmouseout = function() {
+			autoSwitchGroup();
+		};
+
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].index = i
+
+			aLi[i].onmouseover = function() {
+				clearInterval(aSpan[groupIndex].timer);
+				for (var i = 0; i < aLi.length; i++) {
+					aLi[i].className = '';
+					aImg[i].className = '';
+				}
+				this.className = 'active';
+				aImg[this.index].className = 'active';
+				if (itemIndex == 0) {
+					groupIndex = n;
+				}
+			};
+
+			aLi[i].onmouseout = function() {
+				itemIndex = this.index;
+				autoSwitchGroup();
+			}
+		}
+	}
+
+</script>
+</body>
+</html>
