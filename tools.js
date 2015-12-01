@@ -33,13 +33,13 @@ function getStyle(obj, attr) {
 
 function doMove(obj, attr, speed, target, fn) {
 
-	clearInterval(obj.timer);
+	clearInterval(obj.timerOfMovement);
 
 	var cur = parseFloat(getStyle(obj, attr));
 
 	speed = cur > target ? -Math.abs(speed) : speed;
 
-	obj.timer = setInterval(function() {
+	obj.timerOfMovement = setInterval(function() {
 
 		cur += speed;
 		//条件speed > 0 && cur >= target || speed < 0 && cur <= target也可以判断
@@ -49,7 +49,7 @@ function doMove(obj, attr, speed, target, fn) {
 
 			obj.style[attr] = cur + 'px';
 
-			clearInterval(obj.timer);
+			clearInterval(obj.timerOfMovement);
 
 			typeof fn == 'function' && fn();
 		} else {
@@ -136,10 +136,72 @@ function indexOf(arr, searchValue, searchIndex, bool) {
 	}
 }
 
+function first(element){
+	var firstElement = element.firstElementChild || element.firstChild;
+	if( !firstElement || firstElement.nodeType !== 1 ){
+		return null
+	}else{
+		return firstElement;
+	}
+};
+function last(element){
+	var lastElement = element.lastElementChild || element.lastChild;
+	if( !lastElement || lastElement.nodeType !== 1 ){
+		return null
+	}else{
+		return lastElement;
+	}
+}
+function next(element){
+	var nextElement = element.nextElementSibling || element.nextSibling;
+	if( !nextElement || nextElement.nodeType !== 1 ){
+		return null
+	}else{
+		return nextElement;
+	}
+};
+function prev(element){
+	var prevElement = element.previousElementSibling || element.previousSibling;
+	if( !prevElement || prevElement.nodeType !== 1 ){
+		return null
+	}else{
+		return prevElement;
+	}
+}
 
 
-
-
+function first(element){
+	var firstElement = element.firstElementChild || element.firstChild;
+	if( !firstElement || firstElement.nodeType !== 1 ){
+		return null
+	}else{
+		return firstElement;
+	}
+};
+function last(element){
+	var lastElement = element.lastElementChild || element.lastChild;
+	if( !lastElement || lastElement.nodeType !== 1 ){
+		return null
+	}else{
+		return lastElement;
+	}
+}
+function next(element){
+	var nextElement = element.nextElementSibling || element.nextSibling;
+	if( !nextElement || nextElement.nodeType !== 1 ){
+		return null
+	}else{
+		return nextElement;
+	}
+};
+function prev(element){
+	var prevElement = element.previousElementSibling || element.previousSibling;
+	if( !prevElement || prevElement.nodeType !== 1 ){
+		return null
+	}else{
+		return prevElement;
+	}
+}
 
 
 
