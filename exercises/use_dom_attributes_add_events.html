@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>use DOM attributes add events to elements</title>
+		<style>
+			#oUl li ul{
+				display: none;
+			}
+			#oUl li ul.show{
+				display: block;
+			}
+			#oUl li ul.hide{
+				display: none;
+			}
+			#oUl li h3 {
+				padding: 0px 20px;
+			}
+			#oUl li h3.padL{
+				padding-left: 30px;
+			}
+			li{
+				list-style: none;
+			}
+		</style>
+    <script>
+
+var arr = [
+{
+    title : "第一级菜单",
+    child : [
+    	{title:"第二集菜单"},
+        {title:"第二集菜单",
+        child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单",
+        		child:[
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"}
+        		]
+        		},
+        		{title:"第三集菜单"}
+        	]
+    	},
+        {
+        	title:"第二集菜单",
+        	child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单"}
+        	]
+        }
+    ]
+},
+{
+    title : "第一级菜单",
+    child : [
+    	{title:"第二集菜单"},
+        {title:"第二集菜单",
+        child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单",
+        		child:[
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"}
+        		]
+        		},
+        		{title:"第三集菜单"}
+        	]
+    	},
+        {
+        	title:"第二集菜单",
+        	child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单"}
+        	]
+        }
+    ]
+},{
+    title : "第一级菜单",
+    child : [
+    	{title:"第二集菜单"},
+        {title:"第二集菜单",
+        child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单",
+        		child:[
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"},
+        			{title:"第四集菜单"}
+        		]
+        		},
+        		{title:"第三集菜单"}
+        	]
+    	},
+        {
+        	title:"第二集菜单",
+        	child:[
+        		{title:"第三集菜单"},
+        		{title:"第三集菜单"}
+        	]
+        }
+    ]
+},
+{
+	title:"第一集菜单"
+},
+];
+function getNextNode( obj ){
+	if( !obj || !obj.nextSibling ) return null;
+
+	if( obj.nextElementSibling ){
+		return obj.nextElementSibling;
+	};
+	if( obj.nextSibling.nodeType === 1 ){
+		return obj.nextSibling;
+	};
+
+	return null;
+
+}
+
+window.onload = function() {
+    function generateTreeMenu(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            str += '<li><h3>' + arr[i].title + '</h3>';
+            if (arr[i].child) {
+                str += '<ul>';
+                generateTreeMenu(arr[i].child);
+                str += '</ul>';
+            }
+            str += '</li>';
+        }
+        return str;
+    }
+
+    var oUl = document.getElementById('oUl'),
+        str = '';
+    oUl.innerHTML = generateTreeMenu(arr);
+
+
+    var aH3 = document.getElementsByTagName('h3');
+    for (var i = 0; i < aH3.length; i++) {
+        var list = getNextNode(aH3[i]);
+        if (list) {
+            aH3[i].style.cursor = 'pointer';
+            aH3[i].style.background = 'url(../img/list/open.png) no-repeat 0 0';
+        }
+        aH3[i].onOff = true;
+        aH3[i].onclick = function() {
+           clearAll(this.onOff, this)
+        };
+
+        function clearAll(bool, obj) {
+            var list = getNextNode(obj);
+            if (list) {
+                var siblings = obj.parentElement.parentElement.children;
+                console.log(siblings)
+                for (var i = 0; i < siblings.length; i++) {
+                    if (siblings[i].children.length > 1) {
+                        var aUl = siblings[i].getElementsByTagName('ul');
+                        for (var j = 0; j < aUl.length; j++) {
+                            aUl[j].className = '';
+                        }
+                        siblings[i].children[0].style.background = 'url(../img/list/open.png) no-repeat 0 0';
+                        bool && (siblings[i].children[0].onOff = true);
+                    }
+                }
+                bool && (list.className = 'show');
+                str = bool ? 'close' : 'open';
+                obj.style.background = 'url(../img/list/' + str + '.png) no-repeat 0 0';
+                obj.onOff = bool ? false : true;
+            }
+        }
+    }
+
+}
+
+
+/*
+	1. 找到页面中的所有的h3,添加事件
+	2. 在当前点击的h3
+		a. 找h3的下一个兄弟节点
+		b. 找h3的父级li，再父级li下面的children[1]
+
+	3.判断一下找到的ul是否存在
+		存在的话，判断一下当前ul的状态
+			显示 -> 隐藏
+			隐藏 -> 显示
+
+	4. 要求：当点击h3的时候，跟当前h3父级同级的其余的li下面的ul全部隐藏
+
+		a. 找到当前点击的h3的父级的父级，就是ppul，
+		b, 在找到这个ppul下面所有的ul，隐藏掉
+			（排除当前h3父级li下面的ul）
+*/
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="oUl"></ul>
+	</body>
+</html>
