@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>always be center without scrollbar</title>
+	<style type="text/css">
+	#center {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		left: 0;
+		top: 0;
+		padding: 10px 6px 4px 2px;
+		border: 5px solid lime;
+	}
+
+	#mask {
+		width: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-color: #000;
+		opacity: 0.5;
+		filter:alpha(opacity=50);
+	}
+	</style>
+</head>
+<body>
+	<div id="center">This is a division</div>
+	<div id="mask"></div>
+	<script type="text/javascript">
+
+	var element = document.getElementById('center'),
+		mask = document.getElementById('mask');
+
+	var elemWidth = element.offsetWidth,
+		elemHeight = element.offsetHeight;
+
+	center();
+
+	window.onresize = function() {
+		center();
+	}
+
+	function center() {
+		var viewWidth = document.documentElement.clientWidth,
+			viewHeight = document.documentElement.clientHeight;
+		element.style.left = (viewWidth - elemWidth) / 2 + 'px';
+		element.style.top = (viewHeight - elemHeight) / 2 + 'px';
+		mask.style.height = document.documentElement.clientHeight + 'px';
+	}
+
+
+	</script>
+</body>
+</html>

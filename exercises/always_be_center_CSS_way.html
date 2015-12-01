@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>always be center CSS way</title>
+	<style type="text/css">
+	#login {
+		width: 200px;
+		height: 200px;
+		position: fixed;
+		left: 50%;
+		top: 50%;
+		padding: 3px 6px 10px 8px;
+		border: 5px solid lime;
+	}
+
+	#mask {
+		width: 100%;
+		background-color: #000;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+	</style>
+</head>
+<body>
+	<div style="height:2000px;"></div>
+	<div id="login">Oh, center</div>
+	<div id="mask"></div>
+	<script type="text/javascript">
+
+	var element = document.getElementById('login'),
+		mask = document.getElementById('mask');
+
+	var elemWidth = element.offsetWidth,
+		elemHeight = element.offsetHeight;
+
+	element.style.marginLeft = -elemWidth/2 + 'px';
+	element.style.marginTop = -elemHeight/2 + 'px';
+
+	function scrollT() {
+		return document.body.scrollTop || document.documentElement.scrollTop;
+	}
+
+	window.onscroll = function() {
+		element.style.marginTop = -( elemHeight/2 - scrollTop()) + 'px';
+	}
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>

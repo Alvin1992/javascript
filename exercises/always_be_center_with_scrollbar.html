@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>always be center with scrollbar</title>
+	<style type="text/css">
+	#login {
+		width: 200px;
+		height: 200px;
+		position: absolute;
+		border: 5px solid aqua;
+		top: 0;
+		left: 0;
+		padding: 2px 3px 7px 6px;
+	}
+
+	#mask {
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: #000;
+		opacity: 0.5;
+		filter: alpha(opacity=50);
+	}
+	</style>
+</head>
+<body>
+	<div style="height:2000px"></div>
+	<div id="login">Oh, center</div>
+	<div id="mask"></div>
+	<script type="text/javascript">
+	var element = document.getElementById('login'),
+		mask = document.getElementById('mask');
+
+	mask.style.height = document.documentElement.scrollHeight + 'px';
+
+	function scrollT() {
+		return document.body.scrollTop || document.documentElement.scrollTop;
+	}
+
+	var elemWidth = element.offsetWidth,
+		elemHeight = element.offsetHeight;
+
+	changePos(0);
+	window.onresize = function() {
+		changePos(0);
+	}
+
+	window.onscroll = function() {
+		changePos(1);
+	}
+
+	function changePos(bool) {
+		element.style.top = (bool ? scrollT() : 0) + (document.documentElement.clientHeight - elemHeight) / 2 + 'px';
+		element.style.left = (document.documentElement.clientWidth - elemWidth) / 2 + 'px';
+	}
+
+	</script>
+</body>
+</html>
