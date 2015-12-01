@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>table</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	#tables, #tables td {
+		border: 1px solid black;
+	}
+</style>
+</head>
+<body>
+    <table id="tables">
+    	<thead>
+    		<tr>
+    			<th>姓名</th>
+    			<th>性别</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    			<td>leo</td>
+    			<td>男</td>
+    		</tr>
+    		<tr>
+    			<td>momo</td>
+    			<td>男</td>
+    		</tr>
+    	</tbody>
+    	<tbody>
+    		<tr>
+    			<td>leo</td>
+    			<td>男</td>
+    		</tr>
+    		<tr>
+    			<td>momo</td>
+    			<td>男</td>
+    		</tr>
+    	</tbody>
+    	<tfoot>
+    		<tr>
+    			<td>人数：4</td>
+    			<td>男：4</td>
+    		</tr>
+    	</tfoot>
+    </table>
+    <script type="text/javascript">
+    var table = document.getElementById('tables');
+    var head = table.tHead;
+    var foot = table.tFoot;
+    var body = table.tBodies;
+
+    head.style.background = 'green';
+    foot.style.background = 'red';
+    body[0].style.background = 'blue';
+
+    var rows = body[1].rows;
+    rows[0].style.background = 'navy';
+
+    var cells = rows[1].cells;
+    cells[0].style.background = 'aqua';
+    </script>
+</body>
+</html>
