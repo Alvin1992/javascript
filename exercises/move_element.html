@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			ul{
+				position: relative;
+			}
+			li{
+				padding: 10px;
+				background: #fff;
+				position: relative;
+			}
+		</style>
+		<script>
+
+		</script>
+	</head>
+
+	<body>
+		<ul id="oUl">
+			<li>
+				<span>啦啦啦啦</span>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</li>
+			<li>
+				<span>哈哈哈哈</span>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</li>
+			<li>
+				<span>嘿嘿额和</span>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</li>
+			<li>
+				<span>呱呱呱呱</span>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</li>
+			<li>
+				<span>哥哥哥哥</span>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</li>
+		</ul>
+		<script type="text/javascript" src="../tools.js"></script>
+		<script type="text/javascript">
+		function addFunc(obj) {
+			var aInput = $('input', obj);
+			aInput[0].onclick = function() {
+				oUl.insertBefore(obj, prev(obj));
+			}
+
+			aInput[1].onclick = function() {
+				if (next(obj)) {
+					oUl.insertBefore(next(obj), obj);
+				} else {
+					oUl.insertBefore(obj, first(oUl));
+				}
+			}
+		}
+		var oUl = $('#oUl'),
+			aLi = $('li', oUl);
+		for (var i = 0; i < aLi.length; i++) {
+			addFunc(aLi[i]);
+		};
+		</script>
+	</body>
+</html>
