@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{padding: 0; margin: 0;}
+			a{
+				text-decoration: none;
+			}
+			#main{
+				width: 800px;
+				height: 2000px;
+				border: 1px dashed #000;
+				margin: 0 auto;
+			}
+			#content {
+				width: 500px;
+				border: 5px solid pink;
+				padding: 20px;
+				margin:20px auto;
+				position: relative;
+			}
+			#content p{
+				line-height: 80px;
+				position: relative;
+			}
+			#content span{
+				color: red;
+				cursor: pointer;
+				position: relative;
+				border: 5px solid pink;
+				padding: 4px;
+				font-size: 14px;
+			}
+			#prompt{
+				padding: 15px;
+				background: green;
+				position: absolute;
+				left: 0;
+				top:0;
+				color: white;
+				line-height: 30px;
+				display: none;
+			}
+		</style>
+<script type="text/javascript" src="../tools.js"></script>
+<script>
+	window.onload = function() {
+		var arrMessage = ['Hello World', 'Alvin', 'testetstetstetstehdhdhfhhfhf'];
+			aSpan = $('span'),
+			box = $('#content'),
+			message = $('#prompt');
+
+		for (var i = 0; i < aSpan.length; i++) {
+			addMessage(aSpan[i], i);
+		}
+
+
+		function addMessage(element, n) {
+			element.onmouseover = function() {
+				message.style.display = 'block';
+				message.innerHTML = arrMessage[n];
+				var offset = this.getBoundingClientRect();
+				var messageLeft = offset.right,
+					messageTop = offset.bottom;
+				var maxLeft = box.getBoundingClientRect().right - parseInt(getStyle(box, 'borderRightWidth')),
+					maxTop = box.getBoundingClientRect().bottom - parseInt(getStyle(box, 'borderBottomWidth'));
+				if ((message.offsetWidth + messageLeft) < maxLeft) {
+					message.style.left = messageLeft + 'px';
+					if ((messageTop + message.offsetHeight) > maxTop) {
+						message.style.top =  maxTop - message.offsetHeight + 'px';
+					} else {
+						message.style.top =  messageTop + 'px';
+					}
+				} else {
+					message.style.left = maxLeft - message.offsetWidth + 'px';
+					message.style.top =  offset.top - message.offsetHeight + 'px';
+				}
+			}
+
+			element.onmouseout = function() {
+				message.style.display = 'none';
+			}
+		}
+
+	}
+</script>
+	</head>
+
+	<body>
+		<div id="main">
+			<div id="content">
+				<p>每的学员来<span>妙味课堂</span>学习</p>
+				<p>每期都有新的学员来<span>妙味课堂</span>学习,<span>妙味课堂</span>欢迎您！</p>
+			</div>
+		</div>
+
+		<div id="prompt"></div>
+	</body>
+</html>
