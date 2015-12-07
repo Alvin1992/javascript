@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>window open</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+</head>
+<body>
+	<button id="btn">This is a button</button>
+    <script type="text/javascript">
+    /*
+     window.open : 打开一个新窗口。
+
+    直接调用：
+    	 window.open
+    	 chrome//ff会阻止打开新窗口
+    	 ie下直接打开新窗口
+
+    通过某个事件来调用
+    	所有浏览器都能打开
+
+    参数说明：
+    	1. 要打开的地址
+    		可以使远程的也可以是本地
+    	2. 打开的方式：
+
+    		_self:在本窗口直接打开
+    		_blank:在新窗口打开 默认
+
+    		可以写iframe的name名，那就记在本窗口嵌套的iframe中打开
+
+    	3.可以设置新窗口的属性
+    		http://www.w3school.com.cn/jsref/met_win_open.asp
+
+    		如果要设置属性，第二个参数，必须为_blank
+
+    	可以改变先窗口大小 兼容所有浏览器要 resizable = yes
+     */
+    // window.open();
+    document.onclick = function() {
+    	// window.open();
+    }
+    var btn = document.getElementById('btn');
+    btn.onclick = function() {
+    	// window.open('https://www.baidu.com/', '_self');
+    	// window.open('https://www.baidu.com/', '_blank', 'width=200, height=300');
+    	var newWindow = window.open();
+    	newWindow.document.write('This is a line which I just wrote');
+    	newWindow.document.close();
+    }
+
+    </script>
+</body>
+</html>
