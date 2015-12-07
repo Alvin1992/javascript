@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bind function</title>
+	<style type="text/css">
+	div {
+		width: 100px;
+		height: 100px;
+		background-color: lime;
+	}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript">
+	function bind(obj, eventName, eventFunc) {
+		if (obj.addEventListener) {
+			return obj.addEventListener(eventName, eventFunc);
+		} else {
+			return obj.attachEvent('on'+eventName, function() {
+				eventFunc.call(obj);
+			});
+		}
+	}
+	var oDiv = document.getElementById('test');
+	bind(oDiv, 'click', function() {
+		this.style.background = 'aqua';
+	});
+	</script>
+</body>
+</html>

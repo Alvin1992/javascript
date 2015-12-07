@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>remove event</title>
+	<style type="text/css">
+		#foobar {
+			width: 100px;
+			height: 100px;
+			border: 1px solid aqua;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="foobar"></div>
+	<script type="text/javascript">
+	//只能清除有名字的事件处理函数
+	var oDiv = document.getElementById('foobar');
+	function addContent() {
+		this.innerHTML = 'This is a Div';
+	}
+	oDiv.addEventListener('click', addContent, false);
+	oDiv.removeEventListener('click', addContent, false);
+
+	oDiv.attachEvent('click', addContent);
+	oDiv.detachEvent('click', addContent);
+
+
+	//因为在bind里面为了解决this的指向问题用了匿名函数，所以此方法不能删除低版本下bind绑定的函数。
+	function unbind(obj, eventName, eventFunc) {
+		if (obj.removeEventListener) {
+			obj.removeEventListener(eventName, eventFunc, false);
+		} else {
+			obj.detachEvent('on'+eventName, eventFunc);
+		}
+	}
+	</script>
+</body>
+</html>

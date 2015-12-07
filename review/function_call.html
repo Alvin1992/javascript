@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>function call & apply</title>
+</head>
+<body>
+	<script type="text/javascript">
+	/*
+		call,apply 是一个方法 函数的方法
+
+		作用：在函数调用的时候，改变函数中this的值
+
+		当调用了这个call方法，就会直接执行这个函数
+
+		call方法的参数：
+			第一个参数：在调用函数的时候，函数中this指向的值
+						如果不传或传入的是null或者undefined，那么函数依然指向window
+
+			从第二个参数开始，依次传入的参数，就作为调用函数的实际参数
+
+		apply方法的参数：
+			第一个参数：在调用函数的时候，函数中this指向的值
+						如果不传或传入的是null或者undefined，那么函数依然指向window
+			第二个参数是一个数组,类数组
+	 */
+	function foobar() {
+		alert(this);
+	}
+
+	//foobar();
+	//foobar.call(null);
+	//foobar.call(undefined);
+	foobar.call(123);
+
+	function sum(a, b) {
+		return a+b;
+	}
+
+	var obj = {
+		foo: 'bar'
+	}
+
+	var result = sum.call(obj, 1, 5);
+	console.log(result);
+
+	var result1 = sum.apply(obj, [5,9]);
+	console.log(result1);
+
+	</script>
+</body>
+</html>

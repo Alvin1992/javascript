@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>event basics</title>
+	<style type="text/css">
+	#test {
+		width: 100px;
+		height: 100px;
+		border: 1px solid aqua;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript">
+	/*
+		当在js中获取页面中某个元素的时候，这个元素身上就有已on开头的属性，这些属性都是与事件有关系的
+
+		当触发元素身上的事件的时候，
+			事件属性对用的值 为null，触发后毫无反应
+			事件属性对用的值为 函数  触发事件后就会执行这个函数
+
+		被事件调用的函数，叫事件处理函数
+	 */
+
+	var oDiv = document.getElementById('test');
+	oDiv.onclick = function() {
+		this.style.background = 'lime';
+	}
+
+	/*
+		同一元素同一个事件不能添加多个事件处理函数，
+		如果添加多个事件处理函数，下面会把上面的覆盖掉
+	 */
+
+	oDiv.onclick = function() {
+		this.style.left = '20px';
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				padding: 50px;
+				background: red;
+				font-size: 50px;
+				color: #fff;
+			}
+			#div2{
+				background: blue;
+			}
+			#div3{
+				background: green;
+			}
+		</style>
+		<script>
+		/*
+			冒泡：当某个元素触发某个事件的时候，从当前的元素开始向上，沿途经过的祖先节点都会触发相对应这个事件
+
+			element.addEventListener(事件名，事件处理函数，布尔值)
+				第三个参数布尔值：
+				true:捕获
+				false：冒泡
+
+			事件模型的三个阶段：
+				捕获阶段： 从顶层的window开始到目标元素
+				目标阶段： 处在目标元素身上
+				冒泡阶段：从目标元素到顶层的window
+
+
+			attachEvent:不支持捕获的，只有冒泡
+
+		*/
+		window.onload = function(){
+
+			div3.addEventListener("click",function (){
+				alert( this.id )
+			},false);
+			div2.addEventListener("click",function (){
+				alert( this.id )
+			},false);
+		};
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">div1<div id="div2">div2<div id="div3">div3</div>	</div>
+		</div>
+	</body>
+</html>

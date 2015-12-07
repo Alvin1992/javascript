@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>add event</title>
+	<style type="text/css">
+	#foobar {
+		width: 100px;
+		height: 100px;
+		border: 1px solid aqua;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	</style>
+</head>
+<body>
+	<div id="foobar"></div>
+	<script type="text/javascript">
+		/*
+			事件绑定
+				标准浏览器：（ie9,10,11）
+					element.addEventListener(事件名,事件处理函数，布尔值);
+
+					1. 事件名 是不加on的
+					2. 执行的顺序，是添加的顺序
+					3. 事件处理函数里面的this，指向的是触发事件的元素
+
+				低版本（ie6,7,8）：
+
+					element.attachEvent(on+事件名，事件处理函数);
+
+					1. 事件名，加on
+					2. 执行的顺序，跟添加的顺序相反
+					3. 事件处理函数里面的this，指向的是window
+		 */
+		var oDiv = document.getElementById('foobar');
+		oDiv.addEventListener('click', function() {
+			alert(123);
+		}, false);
+
+		oDiv.addEventListener('click', function() {
+			alert(456);
+		}, false);
+
+		/*oDiv.attachEvent('onclick', function() {
+			alert(123);
+		});
+		oDiv.attachEvent('onclick', function() {
+			alert(456);
+		});*/
+
+		function bind(obj, eventName, eventFunc) {
+			if (obj.addEventListener) {
+				obj.addEventListener(eventName, eventFunc, false);
+			} else {
+				obj.attachEvent('on'+eventName, function() {
+					eventFunc.call(obj);
+				});
+			}
+		}
+
+		bind(oDiv, 'mouseover', function() {
+			alert(789);
+		});
+	</script>
+</body>
+</html>

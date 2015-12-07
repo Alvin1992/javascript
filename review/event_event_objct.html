@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>event object</title>
+	<style type="text/css">
+	div {
+		width: 100px;
+		height: 100px;
+		border: 1px solid lime;
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	<div id="test"></div>
+	<script type="text/javascript">
+	/*
+		当触发一个事件的时候，需要知道这个事件触发的一些细节
+		把这个事件信息保存在在一个对象里，这个对象就叫做事件对象
+
+		在标准浏览器：
+			事件对象最为事件处理函数的第一个参数传过来
+
+		在低版本浏览器中,chrome也支持
+
+			事件对象，作为全局的一个变量，这个变量存的就是事件对象，这各变量名，event
+
+		兼容写法，就是在事件处理函数中：
+			var e = ev || event;
+	 */
+
+	function fn(ev) {
+		var e = ev || event;
+		console.log(e);
+	}
+
+	test.onclick = fn;
+	</script>
+</body>
+</html>

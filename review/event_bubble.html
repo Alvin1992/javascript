@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			div{
+				padding: 50px;
+				background: red;
+				font-size: 50px;
+				color: #fff;
+			}
+			#div2{
+				background: blue;
+			}
+			#div3{
+				background: green;
+			}
+			ul {
+				display: none;
+			}
+			li{
+				background: red;
+			}
+		</style>
+		<script>
+		/*
+
+			事件委托：
+				把事件委托到某个祖先节点上，通过事件的冒泡，触发祖先节点上的事件
+				事件源
+					标准浏览器下：
+						事件对象 下面的
+							e.target
+					在ie的低版本：
+						e.srcElement;
+
+
+		*/
+		window.onload = function(){
+			var oUl = document.getElementById('oUl'),
+				btn = document.getElementById('btn');
+			oUl.onclick = function(ev) {
+				var e = ev || event,
+					target = e.target || e.srcElement;
+				if (target.nodeName === 'A') {
+					this.removeChild(target.parentNode);
+				}
+			}
+
+			btn.onclick = function(ev) {
+				var e = ev || event;
+				oUl.style.display = 'block';
+				e.cancelBubble = true;
+			}
+
+			document.onclick = function() {
+				oUl.style.display = 'none';
+			}
+		};
+		</script>
+	</head>
+
+	<body>
+		<input type="text" name="" id="oText" />
+		<input type="button" value="发表" id="btn" />
+		<ul id="oUl">
+			<li>123<a href="javascript:;">删除</a></li>
+			<li>123<a href="javascript:;">删除</a></li>
+			<li>123<a href="javascript:;">删除</a></li>
+			<li>123<a href="javascript:;">删除</a></li>
+			<li>123<a href="javascript:;">删除</a></li>
+		</ul>
+	</body>
+</html>
