@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	        <title>offsetParent</title>
+			<style>
+				*{
+					padding: 0;
+					margin: 0;
+				}
+				div{
+					font-size: 30px;
+					color: #fff;
+				}
+				#div1{
+					 width: 500px;
+					height: 500px; 
+					background: red;
+					 position: relative; 
+				}
+				#div2{
+					 width: 300px;
+					 height: 300px;  
+					background: blue;
+					   position: relative;   
+					  margin:30px;
+					  border: 5px solid #000;
+				}
+				#div3{
+					width: 100px;
+					height: 100px;
+					background: green;  
+					position: absolute;
+					left: 20px;
+					top:20px;   
+					border: 5px solid #000;
+					margin: 30px;
+				}
+			</style>
+			<script>
+				// offsetParent:距离当前节点最近的具有定位属性的祖先节点
+
+				// 注意：
+				// 	 祖先节点必须要有定位属性，否则offsetParent在低版本ie中会有严重混乱的兼容问题
+
+				// 如果祖先节点没有定位，默认为body
+				// document.body.offsetParent 为null
+
+				// element.offsetLeft/elemnt.offsetTop:
+				// 	获取到elemtn这个元素，距离offsetParent左侧的偏移量
+
+				// 	没有offsetRight/offsetBottom
+				window.onload = function(){
+
+					alert( div3.offsetParent.offsetLeft )
+				};
+			</script>
+		</head>
+
+		<body>
+			<div id="div1">
+				div1
+				<div id="div2">
+					div2
+				<div id="div3">
+					div3
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

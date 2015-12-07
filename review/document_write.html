@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	        <title></title>
+			<style>
+				*{
+					padding: 0;
+					margin: 0;
+				}
+
+			</style>
+			<script>
+				document.write( 123 )
+				var style = "<style>#run{background:red;}</style>";
+				document.write( style )
+				var script = "<script>alert(123)<\/script>";
+				document.write( script )
+			</script>
+		</head>
+
+		<body>
+			<textarea id="oText"></textarea>
+			<input type="button" value="运行" id="run" />
+		</body>
+</html>
