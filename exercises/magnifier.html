@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>magnifier</title>
+	<style type="text/css">
+	body, div {
+		margin: 0;
+		padding: 0;
+	}
+	#original-div {
+		width: 350px;
+		height: 350px;
+		float: left;
+		border: 1px solid lime;
+		margin-left: 200px;
+		position: relative;
+	}
+
+	#rect {
+		position: absolute;
+		width: 175px;
+		height: 175px;
+		left: 0;
+		top: 0;
+		border: 1px solid red;
+		display: none;
+	}
+
+	#zoom-div {
+		width: 400px;
+		height: 400px;
+		border: 1px solid aqua;
+		position: relative;
+		float: left;
+		overflow: hidden;
+	}
+
+	#zoom-div img {
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+	</style>
+</head>
+<body>
+	<div id="original-div">
+		<img src="../img/magnifier/lr_pic.jpg">
+		<div id="rect"></div>
+	</div>
+	<div id="zoom-div"><img src="../img/magnifier/hr_pic.jpg"></div>
+	<script type="text/javascript" src="../tools.js"></script>
+	<script type="text/javascript">
+		var orgDiv = $('#original-div'),
+			rect = $('#rect'),
+			hr = $('img', $('#zoom-div'))[0],
+			ordinates = orgDiv.getBoundingClientRect(),
+			divLeft = ordinates.left,
+			divTop = ordinates.top;
+		orgDiv.onmousemove = function(ev) {
+			var e = ev || event;
+			rect.style.display = 'block';
+			var maxLeft = orgDiv.clientWidth - rect.offsetWidth,
+				maxTop = orgDiv.clientHeight - rect.offsetHeight;
+				console.log(maxLeft, maxTop)
+			var l = e.clientX - divLeft - rect.offsetWidth / 2;
+			var t = e.clientY - divTop - rect.offsetHeight / 2;
+			l <= 0 && (l = 0);
+			t <= 0 && (t = 0);
+			l >= maxLeft && (l = maxLeft);
+			t >= maxTop && (t = maxTop);
+			rect.style.left = l + 'px';
+			rect.style.top = t + 'px';
+
+			var ratioLeft = (l / orgDiv.clientWidth).toFixed(2),
+				ratioTop = (t / orgDiv.clientHeight).toFixed(2);
+			var hl = Math.round(hr.offsetWidth * ratioLeft),
+				ht = Math.round(hr.offsetHeight * ratioTop);
+
+			hr.style.top= -ht + 'px';
+			hr.style.left = -hl + 'px';
+
+		}
+	</script>
+</body>
+</html>
