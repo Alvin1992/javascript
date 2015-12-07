@@ -156,7 +156,6 @@ window.onload = function() {
             var list = getNextNode(obj);
             if (list) {
                 var siblings = obj.parentElement.parentElement.children;
-                console.log(siblings)
                 for (var i = 0; i < siblings.length; i++) {
                     if (siblings[i].children.length > 1) {
                         var aUl = siblings[i].getElementsByTagName('ul');
