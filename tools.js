@@ -169,37 +169,19 @@ function prev(element){
 	}
 }
 
+function getOffset(element) {
+	var offsetLeft = element.offsetLeft,
+		offsetTop = element.offsetTop,
+		current = element.offsetParent;
+	while (current !== null) {
+		offsetLeft += current.offsetLeft + (parseInt(getStyle(current, 'borderLeftWidth')) || 0);
+		offsetTop += current.offsetTop + (parseInt(getStyle(current, 'borderLeftHeight')) || 0);
+		current = current.offsetParent;
+	}
 
-function first(element){
-	var firstElement = element.firstElementChild || element.firstChild;
-	if( !firstElement || firstElement.nodeType !== 1 ){
-		return null
-	}else{
-		return firstElement;
-	}
-};
-function last(element){
-	var lastElement = element.lastElementChild || element.lastChild;
-	if( !lastElement || lastElement.nodeType !== 1 ){
-		return null
-	}else{
-		return lastElement;
-	}
-}
-function next(element){
-	var nextElement = element.nextElementSibling || element.nextSibling;
-	if( !nextElement || nextElement.nodeType !== 1 ){
-		return null
-	}else{
-		return nextElement;
-	}
-};
-function prev(element){
-	var prevElement = element.previousElementSibling || element.previousSibling;
-	if( !prevElement || prevElement.nodeType !== 1 ){
-		return null
-	}else{
-		return prevElement;
+	return {
+		offsetL: offsetLeft,
+		offsetT: offsetTop
 	}
 }
 
